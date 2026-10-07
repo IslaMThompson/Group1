@@ -43,13 +43,13 @@ The organisation requires the information of various countries populations in an
 
 ## EXTENSIONS
 
-3. **Area does not exist**:
+**Area does not exist**:
     1. population reporter informs the organisation no area exists.
 
 ## SUB-VARIATIONS
 
-The area giving can be the globe, a continent or a region
+The area given can be the globe, a continent or a region
 
 ## SCHEDULE
 
-**DUE DATE**: 28/11/25
+**DUE DATE**: 26/11/26
