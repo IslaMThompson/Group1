@@ -1,10 +1,10 @@
-# USE CASE: 3 Produce a report on cities in a given area (globe, continent, region, country, district) from highest population to lowest
+# USE CASE: 3 Produce a report with the information of the worlds languages (language name, number, % of worlds population) from the greatest number of speakers to smallest
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As a population reporter I want to organise all cities in an area based on largest population to smallest so that I can compare populations of all the cities in that area
+As a population reporter I want to be able to produce a generate a report on the worlds languages with all it's information, so I can review information on different countries languages organised from the highest number of speakers to smallest
 
 ### Scope
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-We know the area is the globe or the specific continent, region, country or district.  Database contains population data of the cities.
+Database contains information on countries languages
 
 ### Success End Condition
 
@@ -32,23 +32,21 @@ population reporter
 
 ### Trigger
 
-The organisation requires the information of various cities populations in an area.
+The organisation requires a report with information on the worlds languages
 
 ## MAIN SUCCESS SCENARIO
 
-1. The organisation requests the populations of cities in a given area
-2. The population reporter notes the given area
-3. The population reporter generates the report on the cities in said area organised by population
-4. The population reporter gives the report to the organisation
+1. The organisation requests a report with language information
+2. The population reporter generates the report
+3. The population reporter gives the report to the organisation
 
 ## EXTENSIONS
 
-**Area does not exist**:
-    1. population reporter informs the organisation no area exists.
+None
 
 ## SUB-VARIATIONS
 
-The area given can be the globe, a continent, a region a country or a district
+Languages that will be produced in the report are, Chinese, English, Hindi, Spanish and Arabic.
 
 ## SCHEDULE
 

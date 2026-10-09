@@ -1,10 +1,10 @@
-# USE CASE: 1 Produce a report on countries in a given area (globe, continent, region) from highest population to lowest
+# USE CASE: 1 Produce a report with the information of a city (name, country, district, population)
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As a population reporter I want to organise all countries in an area based on largest population to smallest so that I can compare populations of all the countries in that area
+As a population reporter I want to be able to produce a generate a report on a cities in different areas with all it's information, so I can review information on different cities organised from the largest population to smallest
 
 ### Scope
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-We know the area is the globe or the specific continent or region.  Database contains population data of the countries.
+Database contains information on cities
 
 ### Success End Condition
 
@@ -32,23 +32,25 @@ population reporter
 
 ### Trigger
 
-The organisation requires the information of various countries populations in an area.
+The organisation requires a report with a cities information in a given area
 
 ## MAIN SUCCESS SCENARIO
 
-1. The organisation requests the populations of countries in a given area
-2. The population reporter notes the given area
-3. The population reporter generates the report on the countries in said area organised by population
+1. The organisation requests a report with cities information in an area
+2. The population reporter captures the area
+3. The population reporter generates the report
 4. The population reporter gives the report to the organisation
 
 ## EXTENSIONS
 
 **Area does not exist**:
-    1. population reporter informs the organisation no area exists.
+1. population reporter informs the organisation no area exists.
 
 ## SUB-VARIATIONS
 
-The area given can be the globe, a continent or a region
+An option to generate a report for cities in areas (World, continent, region, country or district) organised from the largest population to smallest
+An option to generate only a certain number of the most populated cities in an area (World, continent, region , country or district)
+
 
 ## SCHEDULE
 

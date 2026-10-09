@@ -1,10 +1,9 @@
-# USE CASE: 5 Produce a report on all capital cities in a given area (globe, continent, region) from highest population to lowest
-
+# USE CASE: 5 Produce a report with the information of a population in an area (area name, total population)
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As a population reporter I want to organise all capital cities in an area based on largest population to smallest so that I can compare populations of all the capital cities
+As a population reporter I want to be able to produce and generate a report on an areas population with all it's information, so I can review populations in different areas
 
 ### Scope
 
@@ -16,7 +15,7 @@ Primary task.
 
 ### Preconditions
 
-We know the area is the globe or the specific continent or region.  Database contains population data of the capital cities.
+Database contains information on populations
 
 ### Success End Condition
 
@@ -32,23 +31,23 @@ population reporter
 
 ### Trigger
 
-The organisation requires the information of various capital cities populations in an area.
+The organisation requires a report with information on population
 
 ## MAIN SUCCESS SCENARIO
 
-1. The organisation requests the populations of capital cities in a given area
-2. The population reporter notes the given area
-3. The population reporter generates the report on the capital cities in said area organised by population
+1. The organisation requests a report with populations information of an area
+2. The population reporter captures the area
+3. The population reporter generates the report
 4. The population reporter gives the report to the organisation
 
 ## EXTENSIONS
 
-**Area does not exist**:
-    1. population reporter informs the organisation no area exists.
+**area does not exist**:
+1. population reporter informs the organisation no area exists.****
 
 ## SUB-VARIATIONS
 
-Area given could be the globe, a continent or a region
+An option to generate a report for areas world, continent, region, country, district or city
 
 ## SCHEDULE
 

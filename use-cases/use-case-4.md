@@ -1,10 +1,10 @@
-# USE CASE: 4 Produce a report on a given number of cities with the highest population in a given area (globe, continent, region, country, district) from highest population to lowest
+# USE CASE: 4 Produce a report with the information of capital cities (Name, country, population)
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As a population reporter I want to organise a certain number of cities in an area based on largest population to smallest so that I can report on the cities with the highest population
+As a population reporter I want to be able to produce a generate a report on a capital cities in different areas with all it's information, so I can review information on different cities organised from the largest population to smallest
 
 ### Scope
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-We know the area is the globe or the specific continent, region, country or district and how many cities should be displayed. Database contains population data of the cities.
+Database contains information on capital cities
 
 ### Success End Condition
 
@@ -32,23 +32,24 @@ population reporter
 
 ### Trigger
 
-The organisation requires the information of various cities with the highest populations in an area.
+The organisation requires a report with information on capital cities in a given area
 
 ## MAIN SUCCESS SCENARIO
 
-1. The organisation requests a number of cities with the highest populations in a given area
-2. The population reporter notes the given area and wanted number
-3. The population reporter generates the report on the cities with the highest populations in said area
+1. The organisation requests a report with capital cities information in an area
+2. The population reporter captures the area
+3. The population reporter generates the report
 4. The population reporter gives the report to the organisation
 
 ## EXTENSIONS
 
 **Area does not exist**:
-    1. population reporter informs the organisation no area exists.
+1. population reporter informs the organisation no area exists.
 
 ## SUB-VARIATIONS
 
-The area given can be the globe, a continent, a region a country or a district
+An option to generate a report for capital cities in areas (World, continent or region) organised from the largest population to smallest
+An option to generate only a certain number of the most populated cities in an area (World, continent or region)
 
 ## SCHEDULE
 
