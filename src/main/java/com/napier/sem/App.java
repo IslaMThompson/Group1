@@ -2,9 +2,31 @@ package com.napier.sem;
 
 import java.sql.*;
 
+/**
+ * Application to generate various reports from the world database
+ */
 public class App
 {
+    /**
+     * Main method, Just being used to call the connect and disconnect at the moment
+     * @param args
+     */
     public static void main(String[] args)
+    {
+        App a = new App();
+        a.connect();
+        a.disconnect();
+    }
+
+    /**
+     * Connection to MySQL database.
+     */
+    private Connection con = null;
+
+    /**
+     * Connect to the MySQL database.
+     */
+    public void connect()
     {
         try
         {
@@ -18,7 +40,6 @@ public class App
         }
 
         // Connection to the database
-        Connection con = null;
         int retries = 100;
         for (int i = 0; i < retries; ++i)
         {
@@ -37,7 +58,7 @@ public class App
             }
             catch (SQLException sqle)
             {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
             }
             catch (InterruptedException ie)
@@ -45,7 +66,13 @@ public class App
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
+    }
 
+    /**
+     * Disconnect from the MySQL database.
+     */
+    public void disconnect()
+    {
         if (con != null)
         {
             try
