@@ -43,6 +43,8 @@ The organisation requires a report with information on capital cities in a given
 
 ## EXTENSIONS
 
+Extends from use-case 1
+
 **Area does not exist**:
 1. population reporter informs the organisation no area exists.
 

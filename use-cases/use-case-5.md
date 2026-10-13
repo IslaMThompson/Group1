@@ -42,6 +42,8 @@ The organisation requires a report with information on population
 
 ## EXTENSIONS
 
+Has extension use-case 6
+
 **area does not exist**:
 1. population reporter informs the organisation no area exists.****
 
