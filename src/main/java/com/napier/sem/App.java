@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class App
 {
     /**
-     * Main method, Just being used to call the connect and disconnect at the moment
-     * @param args
+     * Main method, to connect disconnect and run the various reports from.
+     * @param args -
      */
     public static void main(String[] args)
     {
@@ -36,11 +36,17 @@ public class App
         //ArrayList<Country> allNCountries = a.getTopCountries(n);
         //a.printCountries(allNCountries);
 
-        // Gets and prints the top n countries in the world
-        String uContinent = "Asia";
+        // Gets and prints the top n countries in a continent
+        //String uContinent = "Asia";
+        //int n = 4;
+        //ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uContinent, n);
+        //a.printCountries(continentNCountries);
+
+        // Gets and prints the top n countries in a region
+        String uRegion = "Polynesia";
         int n = 4;
-        ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uContinent, n);
-        a.printCountries(continentNCountries);
+        ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uRegion, n);
+        a.printCountries(regionNCountries);
 
         a.disconnect();
     }
@@ -265,6 +271,7 @@ public class App
 
     /**
      * Returns ArrayList of top 'n' countries in specified continent
+     * @param n - Number of countries to get
      * @param continent - String for continent to filter by
      * @return countries
      */
@@ -306,8 +313,50 @@ public class App
     }
 
     /**
+     * Returns ArrayList of top 'n' countries in specified region
+     * @param n - Number of countries to get
+     * @param region - String for region to filter by
+     * @return countries
+     */
+    public ArrayList<Country> getTopCountriesByRegion(String region, int n) {
+        if(region == null)
+        {
+            System.out.println("Region is null");
+            return null;
+        }
+
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+                    "FROM country " +
+                    "WHERE Region = '" + region + "' " +
+                    "ORDER BY Population DESC " +
+                    "LIMIT " + n;
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country> countries = new ArrayList<>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.code = rset.getString("Code");
+                country.name = rset.getString("Name");
+                country.continent = rset.getString("Continent");
+                country.region = rset.getString("Region");
+                country.population = rset.getInt("Population");
+                country.capital = rset.getInt("Capital");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details.");
+            return null;
+        }
+    }
+
+    /**
      * Prints a list of countries.
-     *
      * @param countries The list of countries to print.
      */
     public void printCountries(ArrayList<Country> countries) {
