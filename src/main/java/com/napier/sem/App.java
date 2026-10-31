@@ -32,9 +32,15 @@ public class App
         //a.printCountries(regionCountries);
 
         // Gets and prints the top n countries in the world
-        Integer n = 3;
-        ArrayList<Country> allNCountries = a.getTopCountries(n);
-        a.printCountries(allNCountries);
+        //int n = 3;
+        //ArrayList<Country> allNCountries = a.getTopCountries(n);
+        //a.printCountries(allNCountries);
+
+        // Gets and prints the top n countries in the world
+        String uContinent = "Asia";
+        int n = 4;
+        ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uContinent, n);
+        a.printCountries(continentNCountries);
 
         a.disconnect();
     }
@@ -227,19 +233,54 @@ public class App
      * @param n the number of countries to print
      * @return countries
      */
-    public ArrayList<Country> getTopCountries(Integer n) {
+    public ArrayList<Country> getTopCountries(int n) {
         try {
             Statement stmt = con.createStatement();
 
-            // Check if input is null
-            if(n == null)
-            {
-                System.out.println("Line input is null");
-                return null;
+            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+                    "FROM country " +
+                    "ORDER BY Population DESC " +
+                    "LIMIT " + n;
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country> countries = new ArrayList<>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.code = rset.getString("Code");
+                country.name = rset.getString("Name");
+                country.continent = rset.getString("Continent");
+                country.region = rset.getString("Region");
+                country.population = rset.getInt("Population");
+                country.capital = rset.getInt("Capital");
+                countries.add(country);
             }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details.");
+            return null;
+        }
+    }
+
+    /**
+     * Returns ArrayList of top 'n' countries in specified continent
+     * @param continent - String for continent to filter by
+     * @return countries
+     */
+    public ArrayList<Country> getTopCountriesByContinent(String continent, int n) {
+        if(continent == null)
+        {
+            System.out.println("Continent is null");
+            return null;
+        }
+
+        try {
+            Statement stmt = con.createStatement();
 
             String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
                     "FROM country " +
+                    "WHERE Continent = '" + continent + "' " +
                     "ORDER BY Population DESC " +
                     "LIMIT " + n;
 
