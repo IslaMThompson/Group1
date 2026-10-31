@@ -19,9 +19,13 @@ public class App
         //ArrayList<Country> allCountries = a.getAllCountries();
         //a.printCountries(allCountries);
 
-        String uContinent = "Europe";
-        ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
-        a.printCountries(continentCountries);
+        //String uContinent = "Europe";
+        //ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
+        //a.printCountries(continentCountries);
+
+        String uRegion = "Caribbean";
+        ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
+        a.printCountries(regionCountries);
 
         a.disconnect();
     }
@@ -146,6 +150,46 @@ public class App
             String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
                     "FROM country " +
                     "WHERE Continent = '" + continent + "' " +
+                    "ORDER BY Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country> countries = new ArrayList<>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.code = rset.getString("Code");
+                country.name = rset.getString("Name");
+                country.continent = rset.getString("Continent");
+                country.region = rset.getString("Region");
+                country.population = rset.getInt("Population");
+                country.capital = rset.getInt("Capital");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves details for all countries for specified region and stores them in an ArrayList.
+     * @param region - String for region to filter by
+     * @return countries
+     */
+    public ArrayList<Country> getCountriesByRegion(String region) {
+        if(region == null)
+        {
+            System.out.println("Region is null");
+            return null;
+        }
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+                    "FROM country " +
+                    "WHERE Region = '" + region + "' " +
                     "ORDER BY Population DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
