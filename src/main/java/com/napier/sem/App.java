@@ -16,13 +16,16 @@ public class App
     {
         App a = new App();
         a.connect();
-        //ArrayList<Country> allCountries = a.getAllCountries();
-        //a.printCountries(allCountries);
+        // Gets and prints all countries in the world
+        ArrayList<Country> allCountries = a.getAllCountries();
+        a.printCountries(allCountries);
 
-        //String uContinent = "Europe";
-        //ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
-        //a.printCountries(continentCountries);
+        // Gets and prints all countries in a continent
+        String uContinent = "Europe";
+        ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
+        a.printCountries(continentCountries);
 
+        // Gets and prints all countries in a region
         String uRegion = "Caribbean";
         ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
         a.printCountries(regionCountries);
