@@ -18,34 +18,34 @@ public class App
         App a = new App();
         a.connect();
         // Gets and prints all countries in the world
-        //ArrayList<Country> allCountries = a.getAllCountries();
-        //a.printCountries(allCountries);
+        ArrayList<Country> allCountries = a.getAllCountries();
+        a.printCountries(allCountries);
 
         // Gets and prints all countries in a continent
-        //String uContinent = "Europe";
-        //ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
-        //a.printCountries(continentCountries);
+        String uContinent = "Europe";
+        ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
+        a.printCountries(continentCountries);
 
         // Gets and prints all countries in a region
-        //String uRegion = "Caribbean";
-        //ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
-        //a.printCountries(regionCountries);
+        String uRegion = "Caribbean";
+        ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
+        a.printCountries(regionCountries);
 
         // Gets and prints the top n countries in the world
-        //int n = 3;
-        //ArrayList<Country> allNCountries = a.getTopCountries(n);
-        //a.printCountries(allNCountries);
+        int n1 = 3;
+        ArrayList<Country> allNCountries = a.getTopCountries(n1);
+        a.printCountries(allNCountries);
 
         // Gets and prints the top n countries in a continent
-        //String uContinent = "Asia";
-        //int n = 4;
-        //ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uContinent, n);
-        //a.printCountries(continentNCountries);
+        String uNContinent = "Asia";
+        int n2 = 4;
+        ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uNContinent, n2);
+        a.printCountries(continentNCountries);
 
         // Gets and prints the top n countries in a region
-        String uRegion = "Polynesia";
-        int n = 4;
-        ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uRegion, n);
+        String uNRegion = "Polynesia";
+        int n3 = 4;
+        ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
         a.printCountries(regionNCountries);
 
         a.disconnect();
