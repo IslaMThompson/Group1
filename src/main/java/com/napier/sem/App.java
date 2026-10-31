@@ -2,6 +2,7 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Application to generate various reports from the world database
@@ -17,18 +18,23 @@ public class App
         App a = new App();
         a.connect();
         // Gets and prints all countries in the world
-        ArrayList<Country> allCountries = a.getAllCountries();
-        a.printCountries(allCountries);
+        //ArrayList<Country> allCountries = a.getAllCountries();
+        //a.printCountries(allCountries);
 
         // Gets and prints all countries in a continent
-        String uContinent = "Europe";
-        ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
-        a.printCountries(continentCountries);
+        //String uContinent = "Europe";
+        //ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
+        //a.printCountries(continentCountries);
 
         // Gets and prints all countries in a region
-        String uRegion = "Caribbean";
-        ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
-        a.printCountries(regionCountries);
+        //String uRegion = "Caribbean";
+        //ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
+        //a.printCountries(regionCountries);
+
+        // Gets and prints the top n countries in the world
+        Integer n = 3;
+        ArrayList<Country> allNCountries = a.getTopCountries(n);
+        a.printCountries(allNCountries);
 
         a.disconnect();
     }
@@ -194,6 +200,48 @@ public class App
                     "FROM country " +
                     "WHERE Region = '" + region + "' " +
                     "ORDER BY Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country> countries = new ArrayList<>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.code = rset.getString("Code");
+                country.name = rset.getString("Name");
+                country.continent = rset.getString("Continent");
+                country.region = rset.getString("Region");
+                country.population = rset.getInt("Population");
+                country.capital = rset.getInt("Capital");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details.");
+            return null;
+        }
+    }
+
+    /**
+     * Returns ArrayList of top 'n' countries in the world
+     * @param n the number of countries to print
+     * @return countries
+     */
+    public ArrayList<Country> getTopCountries(Integer n) {
+        try {
+            Statement stmt = con.createStatement();
+
+            // Check if input is null
+            if(n == null)
+            {
+                System.out.println("Line input is null");
+                return null;
+            }
+
+            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+                    "FROM country " +
+                    "ORDER BY Population DESC " +
+                    "LIMIT " + n;
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
