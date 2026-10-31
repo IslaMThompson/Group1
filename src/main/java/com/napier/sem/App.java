@@ -2,7 +2,6 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Application to generate various reports from the world database
@@ -18,35 +17,38 @@ public class App
         App a = new App();
         a.connect();
         // Gets and prints all countries in the world
-        ArrayList<Country> allCountries = a.getAllCountries();
-        a.printCountries(allCountries);
+        //ArrayList<Country> allCountries = a.getAllCountries();
+        //a.printCountries(allCountries);
 
         // Gets and prints all countries in a continent
-        String uContinent = "Europe";
-        ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
-        a.printCountries(continentCountries);
+        //String uContinent = "Europe";
+        //ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
+        //a.printCountries(continentCountries);
 
         // Gets and prints all countries in a region
-        String uRegion = "Caribbean";
-        ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
-        a.printCountries(regionCountries);
+        //String uRegion = "Caribbean";
+        //ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
+        //a.printCountries(regionCountries);
 
         // Gets and prints the top n countries in the world
-        int n1 = 3;
-        ArrayList<Country> allNCountries = a.getTopCountries(n1);
-        a.printCountries(allNCountries);
+        //int n1 = 3;
+        //ArrayList<Country> allNCountries = a.getTopCountries(n1);
+        //a.printCountries(allNCountries);
 
         // Gets and prints the top n countries in a continent
-        String uNContinent = "Asia";
-        int n2 = 4;
-        ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uNContinent, n2);
-        a.printCountries(continentNCountries);
+        //String uNContinent = "Asia";
+        //int n2 = 4;
+        //ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uNContinent, n2);
+        //a.printCountries(continentNCountries);
 
         // Gets and prints the top n countries in a region
-        String uNRegion = "Polynesia";
-        int n3 = 4;
-        ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
-        a.printCountries(regionNCountries);
+        //String uNRegion = "Polynesia";
+        //int n3 = 4;
+        //ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
+        //a.printCountries(regionNCountries);
+
+        ArrayList<City> allCities = a.getAllCities();
+        a.printCities(allCities);
 
         a.disconnect();
     }
@@ -381,6 +383,67 @@ public class App
 
             String country_string = String.format("%-8s %-45s %-15s %-30s %-15s %-10s",
                     country.code, country.name, country.continent, country.region, country.population, country.capital);
+            System.out.println(country_string);
+        }
+    }
+
+    /**
+     * Retrieves details for all cities in the world and stores them in an ArrayList.
+     * @return cities
+     */
+    public ArrayList<City> getAllCities() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT Name, CountryCode, District, Population " +
+                    "FROM city " +
+                    "ORDER BY Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<City> cities = new ArrayList<>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.countrycode = rset.getString("CountryCode");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details.");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of cities.
+     * @param cities The list of cities to print.
+     */
+    public void printCities(ArrayList<City> cities) {
+        // Check countries is not null.
+        if (cities == null) {
+            System.out.println("No cities in list.");
+            return;
+        }
+        else if(cities.isEmpty())
+        {
+            System.out.println("No cities in list.");
+            return;
+        }
+
+        // Print header.
+        System.out.println(String.format("%-45s %-8s %-20s %-20s", "Name", "Country", "District", "Population"));
+
+        // Loop over all countries in the list.
+        for (City city : cities) {
+            if (city == null)
+                continue;
+
+            String country_string = String.format("%-45s %-8s %-20s %-20s",
+                    city.name, city.countrycode, city.district, city.population);
             System.out.println(country_string);
         }
     }
