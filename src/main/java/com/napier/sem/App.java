@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Application to generate various reports from the world database
@@ -15,6 +16,8 @@ public class App
     {
         App a = new App();
         a.connect();
+        ArrayList<Country> allCountries = a.getAllCountries();
+        a.printCountries(allCountries);
         a.disconnect();
     }
 
@@ -84,6 +87,70 @@ public class App
             {
                 System.out.println("Error closing connection to database");
             }
+        }
+    }
+
+    /**
+     * Retrieves details for all countries in the world and stores them in an ArrayList.
+     * @return countries
+     */
+    public ArrayList<Country> getAllCountries() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+                    "FROM country " +
+                    "ORDER BY Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country> countries = new ArrayList<>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.code = rset.getString("Code");
+                country.name = rset.getString("Name");
+                country.continent = rset.getString("Continent");
+                country.region = rset.getString("Region");
+                country.population = rset.getInt("Population");
+                country.capital = rset.getInt("Capital");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details.");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of countries.
+     *
+     * @param countries The list of countries to print.
+     */
+    public void printCountries(ArrayList<Country> countries) {
+        // Check countries is not null.
+        if (countries == null) {
+            System.out.println("No countries in list.");
+            return;
+        }
+        else if(countries.isEmpty())
+        {
+            System.out.println("No countries in list.");
+            return;
+        }
+
+        // Print header.
+        System.out.println(String.format("%-8s %-45s %-15s %-30s %-15s %-10s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+
+        // Loop over all countries in the list.
+        for (Country country : countries) {
+            if (country == null)
+                continue;
+
+            String country_string = String.format("%-8s %-45s %-15s %-30s %-15s %-10s",
+                    country.code, country.name, country.continent, country.region, country.population, country.capital);
+            System.out.println(country_string);
         }
     }
 }
