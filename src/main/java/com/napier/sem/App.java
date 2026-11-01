@@ -81,6 +81,11 @@ public class App
         ArrayList<City> topContinentCities = a.getTopCitiesByContinent(uCityContinent, n5);
         a.printCities(topContinentCities);
 
+        int n6 = 6;
+        String uCityRegion = "Southern and Central Asia";
+        ArrayList<City> topRegionCities = a.getTopCitiesByRegion(uCityRegion, n5);
+        a.printCities(topRegionCities);
+
         a.disconnect();
     }
 
@@ -628,6 +633,7 @@ public class App
 
     /**
      * Retrieves details for the top cities in a continent and stores them in an ArrayList.
+     * @param limit - The number to display
      * @param continent - the continent to filter by
      * @return cities
      */
@@ -639,6 +645,42 @@ public class App
                     "FROM city " +
                     "JOIN country ON city.CountryCode = country.code " +
                     "WHERE country.Continent = '" + continent + "' " +
+                    "ORDER BY city.Population DESC " +
+                    "LIMIT " + limit + ";";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<City> cities = new ArrayList<>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country_name = rset.getString("Country_Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves details for all cities in a region and stores them in an ArrayList.
+     * @param limit - the number to display
+     * @param region - the continent to filter by
+     * @return cities
+     */
+    public ArrayList<City> getTopCitiesByRegion(String region, int limit) {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.District, city.Population " +
+                    "FROM city " +
+                    "JOIN country ON city.CountryCode = country.code " +
+                    "WHERE country.Region = '" + region + "' " +
                     "ORDER BY city.Population DESC " +
                     "LIMIT " + limit + ";";
 
