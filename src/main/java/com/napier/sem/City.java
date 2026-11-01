@@ -9,7 +9,7 @@ public class City {
     /**
      * Country Code
      */
-    public String countrycode;
+    public String country_name;
 
     /**
      * City District Name

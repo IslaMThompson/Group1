@@ -395,9 +395,10 @@ public class App
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT Name, CountryCode, District, Population " +
+            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.District, city.Population " +
                     "FROM city " +
-                    "ORDER BY Population DESC;";
+                    "JOIN country ON city.CountryCode = country.code " +
+                    "ORDER BY city.Population DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -405,7 +406,7 @@ public class App
             while (rset.next()) {
                 City city = new City();
                 city.name = rset.getString("Name");
-                city.countrycode = rset.getString("CountryCode");
+                city.country_name = rset.getString("Country_Name");
                 city.district = rset.getString("District");
                 city.population = rset.getInt("Population");
                 cities.add(city);
@@ -435,15 +436,15 @@ public class App
         }
 
         // Print header.
-        System.out.println(String.format("%-45s %-8s %-20s %-20s", "Name", "Country", "District", "Population"));
+        System.out.println(String.format("%-40s %-40s %-20s %-20s", "Name", "Country", "District", "Population"));
 
         // Loop over all countries in the list.
         for (City city : cities) {
             if (city == null)
                 continue;
 
-            String country_string = String.format("%-45s %-8s %-20s %-20s",
-                    city.name, city.countrycode, city.district, city.population);
+            String country_string = String.format("%-40s %-40s %-20s %-20s",
+                    city.name, city.country_name, city.district, city.population);
             System.out.println(country_string);
         }
     }
