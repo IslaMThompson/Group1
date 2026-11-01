@@ -72,9 +72,14 @@ public class App
         //a.printCities(districtCities);
 
         // Gets and prints top cities in the world
-        int n4 = 5;
-        ArrayList<City> topCities = a.getTopCities(n4);
-        a.printCities(topCities);
+        //int n4 = 5;
+        //ArrayList<City> topCities = a.getTopCities(n4);
+        //a.printCities(topCities);
+
+        int n5 = 4;
+        String uCityContinent = "South America";
+        ArrayList<City> topContinentCities = a.getTopCitiesByContinent(uCityContinent, n5);
+        a.printCities(topContinentCities);
 
         a.disconnect();
     }
@@ -599,6 +604,41 @@ public class App
             String strSelect = "SELECT city.Name, country.Name AS Country_name, city.District, city.Population " +
                     "FROM city " +
                     "JOIN country ON city.CountryCode = country.code " +
+                    "ORDER BY city.Population DESC " +
+                    "LIMIT " + limit + ";";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<City> cities = new ArrayList<>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country_name = rset.getString("Country_Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves details for the top cities in a continent and stores them in an ArrayList.
+     * @param continent - the continent to filter by
+     * @return cities
+     */
+    public ArrayList<City> getTopCitiesByContinent(String continent, int limit) {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.District, city.Population " +
+                    "FROM city " +
+                    "JOIN country ON city.CountryCode = country.code " +
+                    "WHERE country.Continent = '" + continent + "' " +
                     "ORDER BY city.Population DESC " +
                     "LIMIT " + limit + ";";
 
