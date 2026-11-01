@@ -31,24 +31,24 @@ public class App
         //a.printCountries(regionCountries);
 
         // Gets and prints the top n countries in the world
-        //int n1 = 3;
-        //ArrayList<Country> allNCountries = a.getTopCountries(n1);
-        //a.printCountries(allNCountries);
+        int n1 = 3;
+        ArrayList<Country> allNCountries = a.getTopCountries(n1);
+        a.printCountries(allNCountries);
 
         // Gets and prints the top n countries in a continent
-        //String uNContinent = "Asia";
-        //int n2 = 4;
-        //ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uNContinent, n2);
-        //a.printCountries(continentNCountries);
+        String uNContinent = "Asia";
+        int n2 = 4;
+        ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uNContinent, n2);
+        a.printCountries(continentNCountries);
 
         // Gets and prints the top n countries in a region
-        //String uNRegion = "Polynesia";
-        //int n3 = 4;
-        //ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
-        //a.printCountries(regionNCountries);
+        String uNRegion = "Polynesia";
+        int n3 = 4;
+        ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
+        a.printCountries(regionNCountries);
 
-        ArrayList<City> allCities = a.getAllCities();
-        a.printCities(allCities);
+        //ArrayList<City> allCities = a.getAllCities();
+        //a.printCities(allCities);
 
         a.disconnect();
     }
@@ -130,9 +130,10 @@ public class App
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+            String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "ORDER BY Population DESC;";
+                    "JOIN city ON city.ID = country.Capital " +
+                    "ORDER BY country.Population DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -144,7 +145,7 @@ public class App
                 country.continent = rset.getString("Continent");
                 country.region = rset.getString("Region");
                 country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
+                country.capital = rset.getString("Capital");
                 countries.add(country);
             }
             return countries;
@@ -170,10 +171,11 @@ public class App
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+            String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "WHERE Continent = '" + continent + "' " +
-                    "ORDER BY Population DESC;";
+                    "JOIN city ON city.ID = country.Capital " +
+                    "WHERE country.Continent = '" + continent + "' " +
+                    "ORDER BY country.Population DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -185,7 +187,7 @@ public class App
                 country.continent = rset.getString("Continent");
                 country.region = rset.getString("Region");
                 country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
+                country.capital = rset.getString("Capital");
                 countries.add(country);
             }
             return countries;
@@ -210,10 +212,11 @@ public class App
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+            String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "WHERE Region = '" + region + "' " +
-                    "ORDER BY Population DESC;";
+                    "JOIN city ON city.ID = country.Capital " +
+                    "WHERE country.Region = '" + region + "' " +
+                    "ORDER BY country.Population DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -225,7 +228,7 @@ public class App
                 country.continent = rset.getString("Continent");
                 country.region = rset.getString("Region");
                 country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
+                country.capital = rset.getString("Capital");
                 countries.add(country);
             }
             return countries;
@@ -245,9 +248,10 @@ public class App
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+            String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "ORDER BY Population DESC " +
+                    "JOIN city ON city.ID = country.Capital " +
+                    "ORDER BY country.Population DESC " +
                     "LIMIT " + n;
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -260,7 +264,7 @@ public class App
                 country.continent = rset.getString("Continent");
                 country.region = rset.getString("Region");
                 country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
+                country.capital = rset.getString("Capital");
                 countries.add(country);
             }
             return countries;
@@ -287,10 +291,11 @@ public class App
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+            String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "WHERE Continent = '" + continent + "' " +
-                    "ORDER BY Population DESC " +
+                    "JOIN city ON city.ID = country.Capital " +
+                    "WHERE country.Continent = '" + continent + "' " +
+                    "ORDER BY country.Population DESC " +
                     "LIMIT " + n;
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -303,7 +308,7 @@ public class App
                 country.continent = rset.getString("Continent");
                 country.region = rset.getString("Region");
                 country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
+                country.capital = rset.getString("Capital");
                 countries.add(country);
             }
             return countries;
@@ -330,10 +335,11 @@ public class App
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT Code, Name, Continent, Region, Population, Capital " +
+            String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "WHERE Region = '" + region + "' " +
-                    "ORDER BY Population DESC " +
+                    "JOIN city ON city.ID = country.Capital " +
+                    "WHERE country.Region = '" + region + "' " +
+                    "ORDER BY country.Population DESC " +
                     "LIMIT " + n;
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -346,7 +352,7 @@ public class App
                 country.continent = rset.getString("Continent");
                 country.region = rset.getString("Region");
                 country.population = rset.getInt("Population");
-                country.capital = rset.getInt("Capital");
+                country.capital = rset.getString("Capital");
                 countries.add(country);
             }
             return countries;
@@ -374,14 +380,14 @@ public class App
         }
 
         // Print header.
-        System.out.println(String.format("%-8s %-45s %-15s %-30s %-15s %-10s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        System.out.println(String.format("%-8s %-40s %-15s %-30s %-15s %-10s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
 
         // Loop over all countries in the list.
         for (Country country : countries) {
             if (country == null)
                 continue;
 
-            String country_string = String.format("%-8s %-45s %-15s %-30s %-15s %-10s",
+            String country_string = String.format("%-8s %-40s %-15s %-30s %-15s %-10s",
                     country.code, country.name, country.continent, country.region, country.population, country.capital);
             System.out.println(country_string);
         }

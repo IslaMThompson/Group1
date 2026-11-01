@@ -29,6 +29,6 @@ public class Country {
     /**
      * Country Capital
      */
-    public int capital;
+    public String capital;
 
 }
