@@ -17,79 +17,88 @@ public class App
         App a = new App();
         a.connect();
         // Gets and prints all countries in the world
-        //ArrayList<Country> allCountries = a.getAllCountries();
-        //a.printCountries(allCountries);
+        ArrayList<Country> allCountries = a.getAllCountries();
+        a.printCountries(allCountries);
 
         // Gets and prints all countries in a continent
-        //String uContinent = "Europe";
-        //ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
-        //a.printCountries(continentCountries);
+        String uContinent = "Europe";
+        ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
+        a.printCountries(continentCountries);
 
         // Gets and prints all countries in a region
-        //String uRegion = "Caribbean";
-        //ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
-        //a.printCountries(regionCountries);
+        String uRegion = "Caribbean";
+        ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
+        a.printCountries(regionCountries);
 
         // Gets and prints the top n countries in the world
-        //int n1 = 3;
-        //ArrayList<Country> allNCountries = a.getTopCountries(n1);
-        //a.printCountries(allNCountries);
+        int n1 = 3;
+        ArrayList<Country> allNCountries = a.getTopCountries(n1);
+        a.printCountries(allNCountries);
 
         // Gets and prints the top n countries in a continent
-        //String uNContinent = "Asia";
-        //int n2 = 4;
-        //ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uNContinent, n2);
-        //a.printCountries(continentNCountries);
+        String uNContinent = "Asia";
+        int n2 = 4;
+        ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uNContinent, n2);
+        a.printCountries(continentNCountries);
 
         // Gets and prints the top n countries in a region
-        //String uNRegion = "Polynesia";
-        //int n3 = 4;
-        //ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
-        //a.printCountries(regionNCountries);
+        String uNRegion = "Polynesia";
+        int n3 = 4;
+        ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
+        a.printCountries(regionNCountries);
 
         // Gets and prints all cities
-        //ArrayList<City> allCities = a.getAllCities();
-        //a.printCities(allCities);
+        ArrayList<City> allCities = a.getAllCities();
+        a.printCities(allCities);
 
         // Gets and prints all cities in a continent
-        //String uCContinent = "Africa";
-        //ArrayList<City> continentCities = a.getCitiesByContinent(uCContinent);
-        //a.printCities(continentCities);
+        String uCContinent = "Africa";
+        ArrayList<City> continentCities = a.getCitiesByContinent(uCContinent);
+        a.printCities(continentCities);
 
         // Gets and prints all cities in a region
-        //String uCRegion = "Middle East";
-        //ArrayList<City> regionCities = a.getCitiesByRegion(uCRegion);
-        //a.printCities(regionCities);
+        String uCRegion = "Middle East";
+        ArrayList<City> regionCities = a.getCitiesByRegion(uCRegion);
+        a.printCities(regionCities);
 
         // Gets and prints all cities in a country
-        //String uCCountry = "Belarus";
-        //ArrayList<City> countryCities = a.getCitiesByCountry(uCCountry);
-        //a.printCities(countryCities);
+        String uCCountry = "Belarus";
+        ArrayList<City> countryCities = a.getCitiesByCountry(uCCountry);
+        a.printCities(countryCities);
 
         // Gets and prints all cities in a district
-        //String uCDistrict = "Zuid-Holland";
-        //ArrayList<City> districtCities = a.getCitiesByDistrict(uCDistrict);
-        //a.printCities(districtCities);
+        String uCDistrict = "Zuid-Holland";
+        ArrayList<City> districtCities = a.getCitiesByDistrict(uCDistrict);
+        a.printCities(districtCities);
 
         // Gets and prints top cities in the world
-        //int n4 = 5;
-        //ArrayList<City> topCities = a.getTopCities(n4);
-        //a.printCities(topCities);
+        int n4 = 5;
+        ArrayList<City> topCities = a.getTopCities(n4);
+        a.printCities(topCities);
 
-        //int n5 = 4;
-        //String uCityContinent = "South America";
-        //ArrayList<City> topContinentCities = a.getTopCitiesByContinent(uCityContinent, n5);
-        //a.printCities(topContinentCities);
+        // Gets and prints the top cities in a continent
+        int n5 = 4;
+        String uCityContinent = "South America";
+        ArrayList<City> topContinentCities = a.getTopCitiesByContinent(uCityContinent, n5);
+        a.printCities(topContinentCities);
 
-        //int n6 = 6;
-        //String uCityRegion = "Southern and Central Asia";
-        //ArrayList<City> topRegionCities = a.getTopCitiesByRegion(uCityRegion, n6);
-        //a.printCities(topRegionCities);
+        // Gets and prints the top cities in a region
+        int n6 = 6;
+        String uCityRegion = "Southern and Central Asia";
+        ArrayList<City> topRegionCities = a.getTopCitiesByRegion(uCityRegion, n6);
+        a.printCities(topRegionCities);
 
+        // Gets and prints the top cities in a country
         int n7 = 20;
         String uCityCountry = "United Kingdom";
         ArrayList<City> topCountryCities = a.getTopCitiesByCountry(uCityCountry, n7);
         a.printCities(topCountryCities);
+
+        // Gets and prints tha top cities in a district
+        int n8 = 6;
+        String uCityDistrict = "Buenos Aires";
+        ArrayList<City> topDistrictCities = a.getTopCitiesByDistrict(uCityDistrict, n8);
+        a.printCities(topDistrictCities);
 
         a.disconnect();
     }
@@ -569,7 +578,7 @@ public class App
     }
 
     /**
-     * Retrieves details for all cities in a continent and stores them in an ArrayList.
+     * Retrieves details for all cities in a district and stores them in an ArrayList.
      * @param district - the continent to filter by
      * @return cities
      */
@@ -722,6 +731,42 @@ public class App
                     "FROM city " +
                     "JOIN country ON city.CountryCode = country.code " +
                     "WHERE country.Name = '" + country + "' " +
+                    "ORDER BY city.Population DESC " +
+                    "LIMIT " + limit + ";";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<City> cities = new ArrayList<>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country_name = rset.getString("Country_Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves details for the top cities in a district and stores them in an ArrayList.
+     * @param limit - the number to display
+     * @param district - the continent to filter by
+     * @return cities
+     */
+    public ArrayList<City> getTopCitiesByDistrict(String district, int limit) {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.District, city.Population " +
+                    "FROM city " +
+                    "JOIN country ON city.CountryCode = country.code " +
+                    "WHERE city.District = '" + district + "' " +
                     "ORDER BY city.Population DESC " +
                     "LIMIT " + limit + ";";
 
