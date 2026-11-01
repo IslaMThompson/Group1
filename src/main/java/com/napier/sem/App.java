@@ -16,7 +16,7 @@ public class App
     {
         App a = new App();
         a.connect();
-        /*
+
         // Gets and prints all countries in the world
         ArrayList<Country> allCountries = a.getAllCountries();
         a.printCountries(allCountries);
@@ -101,13 +101,19 @@ public class App
         ArrayList<City> topDistrictCities = a.getTopCitiesByDistrict(uCityDistrict, n8);
         a.printCities(topDistrictCities);
 
+        // Get all capital cities in the world
         ArrayList<City> allCapitalCities = a.getAllCapitalCities();
         a.printCapCities(allCapitalCities);
 
-         */
+        // Get all capital cities in a continent
         String uCapContinent = "Africa";
         ArrayList<City> allContinentCapitalCities = a.getCapCitiesByContinent(uCapContinent);
         a.printCapCities(allContinentCapitalCities);
+
+        // Get all capital cities in a region
+        String uCapRegion = "British Islands";
+        ArrayList<City> allRegionCapitalCities = a.getCapCitiesByRegion(uCapRegion);
+        a.printCapCities(allRegionCapitalCities);
 
         a.disconnect();
     }
@@ -868,7 +874,7 @@ public class App
         try {
             Statement stmt = con.createStatement();
 
-            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.District, city.Population " +
+            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.Population " +
                     "FROM city " +
                     "JOIN country ON city.ID = country.Capital " +
                     "WHERE country.Continent = '" + continent + "' " +
@@ -881,7 +887,39 @@ public class App
                 City city = new City();
                 city.name = rset.getString("Name");
                 city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves details for all capital cities in a region and stores them in an ArrayList.
+     * @param region - the continent to filter by
+     * @return cities
+     */
+    public ArrayList<City> getCapCitiesByRegion(String region) {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.Population " +
+                    "FROM city " +
+                    "JOIN country ON city.ID = country.Capital " +
+                    "WHERE country.Region = '" + region + "' " +
+                    "ORDER BY city.Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<City> cities = new ArrayList<>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country_name = rset.getString("Country_Name");
                 city.population = rset.getInt("Population");
                 cities.add(city);
             }
