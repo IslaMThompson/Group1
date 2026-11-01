@@ -17,7 +17,6 @@ public class App
         App a = new App();
         a.connect();
 
-        /*
         // Gets and prints all countries in the world
         ArrayList<Country> allCountries = a.getAllCountries();
         a.printCountries(allCountries);
@@ -116,15 +115,22 @@ public class App
         ArrayList<City> allRegionCapitalCities = a.getCapCitiesByRegion(uCapRegion);
         a.printCapCities(allRegionCapitalCities);
 
+        // Get the top n capital cities in the world
         int n9 = 10;
         ArrayList<City> topCapitalCities = a.getTopCapCities(n9);
         a.printCapCities(topCapitalCities);
-        */
 
+        // Get the top n capital cities in a continent
         int n10 = 7;
         String uNCapContinent = "Europe";
         ArrayList<City> topCapContinentCities = a.getTopCapCitiesByContinent(uNCapContinent, n10);
         a.printCapCities(topCapContinentCities);
+
+        // Get the top n capital cities in a region
+        int n11 = 8;
+        String uNCapCityRegion = "Western Europe";
+        ArrayList<City> topCapRegionCities = a.getTopCapCitiesByRegion(uNCapCityRegion, n11);
+        a.printCapCities(topCapRegionCities);
 
         a.disconnect();
     }
@@ -989,6 +995,41 @@ public class App
                     "FROM city " +
                     "JOIN country ON city.ID = country.Capital " +
                     "WHERE country.Continent = '" + continent + "' " +
+                    "ORDER BY city.Population DESC " +
+                    "LIMIT " + limit + ";";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<City> cities = new ArrayList<>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country_name = rset.getString("Country_Name");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves details for all cities in a region and stores them in an ArrayList.
+     * @param limit - the number to display
+     * @param region - the continent to filter by
+     * @return cities
+     */
+    public ArrayList<City> getTopCapCitiesByRegion(String region, int limit) {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.Population " +
+                    "FROM city " +
+                    "JOIN country ON city.ID = country.Capital " +
+                    "WHERE country.Region = '" + region + "' " +
                     "ORDER BY city.Population DESC " +
                     "LIMIT " + limit + ";";
 
