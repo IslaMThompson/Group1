@@ -16,6 +16,7 @@ public class App
     {
         App a = new App();
         a.connect();
+        /*
         // Gets and prints all countries in the world
         ArrayList<Country> allCountries = a.getAllCountries();
         a.printCountries(allCountries);
@@ -99,6 +100,11 @@ public class App
         String uCityDistrict = "Buenos Aires";
         ArrayList<City> topDistrictCities = a.getTopCitiesByDistrict(uCityDistrict, n8);
         a.printCities(topDistrictCities);
+
+         */
+
+        ArrayList<City> allCapitalCities = a.getAllCapitalCities();
+        a.printCapCities(allCapitalCities);
 
         a.disconnect();
     }
@@ -815,6 +821,67 @@ public class App
 
             String country_string = String.format("%-40s %-40s %-20s %-20s",
                     city.name, city.country_name, city.district, city.population);
+            System.out.println(country_string);
+        }
+    }
+
+    /**
+     * Retrieves details for all capital cities in the world and stores them in an ArrayList.
+     * @return cities
+     */
+    public ArrayList<City> getAllCapitalCities() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.Population " +
+                    "FROM city " +
+                    "JOIN country ON city.ID = country.Capital " +
+                    "ORDER BY city.Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<City> cities = new ArrayList<>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country_name = rset.getString("Country_Name");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details.");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of capital cities.
+     * @param cCities The list of capital cities to print.
+     */
+    public void printCapCities(ArrayList<City> cCities) {
+        // Check cCities is not null.
+        if (cCities == null) {
+            System.out.println("No cities in list.");
+            return;
+        }
+        else if(cCities.isEmpty())
+        {
+            System.out.println("No cities in list.");
+            return;
+        }
+
+        // Print header.
+        System.out.println(String.format("%-40s %-40s %-20s", "Name", "Country", "Population"));
+
+        // Loop over all countries in the list.
+        for (City city : cCities) {
+            if (city == null)
+                continue;
+
+            String country_string = String.format("%-40s %-40s %-20s",
+                    city.name, city.country_name, city.population);
             System.out.println(country_string);
         }
     }
