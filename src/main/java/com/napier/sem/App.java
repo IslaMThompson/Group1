@@ -101,10 +101,13 @@ public class App
         ArrayList<City> topDistrictCities = a.getTopCitiesByDistrict(uCityDistrict, n8);
         a.printCities(topDistrictCities);
 
-         */
-
         ArrayList<City> allCapitalCities = a.getAllCapitalCities();
         a.printCapCities(allCapitalCities);
+
+         */
+        String uCapContinent = "Africa";
+        ArrayList<City> allContinentCapitalCities = a.getCapCitiesByContinent(uCapContinent);
+        a.printCapCities(allContinentCapitalCities);
 
         a.disconnect();
     }
@@ -845,6 +848,40 @@ public class App
                 City city = new City();
                 city.name = rset.getString("Name");
                 city.country_name = rset.getString("Country_Name");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves details for all capital cities in a continent and stores them in an ArrayList.
+     * @param continent - the continent to filter by
+     * @return cities
+     */
+    public ArrayList<City> getCapCitiesByContinent(String continent) {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.District, city.Population " +
+                    "FROM city " +
+                    "JOIN country ON city.ID = country.Capital " +
+                    "WHERE country.Continent = '" + continent + "' " +
+                    "ORDER BY city.Population DESC;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<City> cities = new ArrayList<>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country_name = rset.getString("Country_Name");
+                city.district = rset.getString("District");
                 city.population = rset.getInt("Population");
                 cities.add(city);
             }
