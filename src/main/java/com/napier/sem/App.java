@@ -76,15 +76,20 @@ public class App
         //ArrayList<City> topCities = a.getTopCities(n4);
         //a.printCities(topCities);
 
-        int n5 = 4;
-        String uCityContinent = "South America";
-        ArrayList<City> topContinentCities = a.getTopCitiesByContinent(uCityContinent, n5);
-        a.printCities(topContinentCities);
+        //int n5 = 4;
+        //String uCityContinent = "South America";
+        //ArrayList<City> topContinentCities = a.getTopCitiesByContinent(uCityContinent, n5);
+        //a.printCities(topContinentCities);
 
-        int n6 = 6;
-        String uCityRegion = "Southern and Central Asia";
-        ArrayList<City> topRegionCities = a.getTopCitiesByRegion(uCityRegion, n5);
-        a.printCities(topRegionCities);
+        //int n6 = 6;
+        //String uCityRegion = "Southern and Central Asia";
+        //ArrayList<City> topRegionCities = a.getTopCitiesByRegion(uCityRegion, n6);
+        //a.printCities(topRegionCities);
+
+        int n7 = 20;
+        String uCityCountry = "United Kingdom";
+        ArrayList<City> topCountryCities = a.getTopCitiesByCountry(uCityCountry, n7);
+        a.printCities(topCountryCities);
 
         a.disconnect();
     }
@@ -681,6 +686,42 @@ public class App
                     "FROM city " +
                     "JOIN country ON city.CountryCode = country.code " +
                     "WHERE country.Region = '" + region + "' " +
+                    "ORDER BY city.Population DESC " +
+                    "LIMIT " + limit + ";";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<City> cities = new ArrayList<>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.country_name = rset.getString("Country_Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves details for the top cities in a country and stores them in an ArrayList.
+     * @param limit - the number to display
+     * @param country - the continent to filter by
+     * @return cities
+     */
+    public ArrayList<City> getTopCitiesByCountry(String country, int limit) {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT city.Name, country.Name AS Country_name, city.District, city.Population " +
+                    "FROM city " +
+                    "JOIN country ON city.CountryCode = country.code " +
+                    "WHERE country.Name = '" + country + "' " +
                     "ORDER BY city.Population DESC " +
                     "LIMIT " + limit + ";";
 
