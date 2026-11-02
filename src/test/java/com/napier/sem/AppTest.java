@@ -30,4 +30,27 @@ public class AppTest
         ArrayList<Country> countries = new ArrayList<Country>();
         app.printCountries(countries);
     }
+
+    @Test
+    void printCountriesTestContainsNull()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        countries.add(null);
+        app.printCountries(countries);
+    }
+
+    @Test
+    void printCountries()
+    {
+        ArrayList<Country> countries = new ArrayList<Country>();
+        Country coun = new Country();
+        coun.code = "ABW";
+        coun.name = "Place";
+        coun.continent = "BiggerPlace";
+        coun.region = "BigBigPlace";
+        coun.population = 200000;
+        coun.capital = "ABW";
+        countries.add(coun);
+        app.printCountries(countries);
+    }
 }
