@@ -19,7 +19,7 @@ public class UnitTests
     }
 
     /**
-     * Testing printCountries
+     * Testing printCountries with no input
      */
     @Test
     void printCountriesTestNull()
@@ -27,6 +27,9 @@ public class UnitTests
         app.printCountries(null);
     }
 
+    /**
+     * Testing printCountries with empty input
+     */
     @Test
     void printCountriesTestEmpty()
     {
@@ -34,6 +37,9 @@ public class UnitTests
         app.printCountries(countries);
     }
 
+    /**
+     * Testing printCountries with input that is null
+     */
     @Test
     void printCountriesTestContainsNull()
     {
@@ -42,6 +48,9 @@ public class UnitTests
         app.printCountries(countries);
     }
 
+    /**
+     * Testing printCountries with normal data
+     */
     @Test
     void printCountries()
     {
@@ -58,7 +67,7 @@ public class UnitTests
     }
 
     /**
-     * Testing printCities
+     * Testing printCities with no input
      */
     @Test
     void printCitiesTestNull()
@@ -66,6 +75,9 @@ public class UnitTests
         app.printCities(null);
     }
 
+    /**
+     * Testing printCities with empty input
+     */
     @Test
     void printCitiesTestEmpty()
     {
@@ -73,6 +85,9 @@ public class UnitTests
         app.printCities(cities);
     }
 
+    /**
+     * Testing printCities with input that is empty
+     */
     @Test
     void printCitiesTestContainsNull()
     {
@@ -81,6 +96,9 @@ public class UnitTests
         app.printCities(cities);
     }
 
+    /**
+     * Testing printCities with normal data
+     */
     @Test
     void printCities()
     {
@@ -95,7 +113,7 @@ public class UnitTests
     }
 
     /**
-     * Testing printCapCities
+     * Testing printCapCities with no input
      */
     @Test
     void printCapCitiesTestNull()
@@ -103,6 +121,9 @@ public class UnitTests
         app.printCapCities(null);
     }
 
+    /**
+     * Testing printCapCities with empty input
+     */
     @Test
     void printCapCitiesTestEmpty()
     {
@@ -110,6 +131,9 @@ public class UnitTests
         app.printCapCities(cities);
     }
 
+    /**
+     * Testing printCapCities with input that is null
+     */
     @Test
     void printCapCitiesTestContainsNull()
     {
@@ -118,6 +142,9 @@ public class UnitTests
         app.printCapCities(cities);
     }
 
+    /**
+     * Testing printCapCities with normal data
+     */
     @Test
     void printCapCities()
     {
@@ -131,7 +158,7 @@ public class UnitTests
     }
 
     /**
-     * Testing get Countries reports
+     * Testing get Countries reports with null inputs
      */
     @Test
     void getCountriesByAreaTestNull()
@@ -141,6 +168,9 @@ public class UnitTests
         app.getCountriesByRegion(null);
     }
 
+    /**
+     * Testing get N Countries reports with null inputs
+     */
     @Test
     void getNCountriesByAreaTestNull()
     {
@@ -153,7 +183,7 @@ public class UnitTests
     }
 
     /**
-     * Testing get Cities reports
+     * Testing get Cities reports with null inputs
      */
     @Test
     void getCitiesByAreaTestNull()
@@ -165,6 +195,9 @@ public class UnitTests
         app.getCitiesByDistrict(null);
     }
 
+    /**
+     * Testing get N Cities Reports with null inputs
+     */
     @Test
     void getNCitiesByAreaTestNull()
     {
@@ -181,7 +214,7 @@ public class UnitTests
     }
 
     /**
-     * Testing get Capital Cities reports
+     * Testing get Capital Cities reports with null inputs
      */
     @Test
     void getCapCitiesByAreaTestNull()
@@ -191,6 +224,9 @@ public class UnitTests
         app.getCapCitiesByRegion(null);
     }
 
+    /**
+     * Testing get N Capital Cities reports with null inputs
+     */
     @Test
     void getNCapCitiesByAreaTestNull()
     {
