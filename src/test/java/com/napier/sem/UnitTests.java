@@ -230,11 +230,11 @@ public class UnitTests
     @Test
     void getNCapCitiesByAreaTestNull()
     {
-        app.getTopCities(null);
-        app.getTopCitiesByContinent(null, null);
-        app.getTopCitiesByRegion(null, null);
+        app.getTopCapCities(null);
+        app.getTopCapCitiesByContinent(null, null);
+        app.getTopCapCitiesByRegion(null, null);
         // To force it to check null numbers
-        app.getTopCitiesByContinent("Africa", null);
-        app.getTopCitiesByRegion("Caribbean", null);
+        app.getTopCapCitiesByContinent("Africa", null);
+        app.getTopCapCitiesByRegion("Caribbean", null);
     }
 }
