@@ -2,22 +2,25 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-public class AppTest
+public class UnitTests
 {
     static App app;
 
+    /**
+     * Initialising app for the tests
+     */
     @BeforeAll
     static void init()
     {
         app = new App();
     }
 
+    /**
+     * Testing printCountries
+     */
     @Test
     void printCountriesTestNull()
     {
@@ -52,5 +55,42 @@ public class AppTest
         coun.capital = "ABW";
         countries.add(coun);
         app.printCountries(countries);
+    }
+
+    /**
+     * Testing printCities
+     */
+    @Test
+    void printCitiesTestNull()
+    {
+        app.printCities(null);
+    }
+
+    @Test
+    void printCitiesTestEmpty()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCities(cities);
+    }
+
+    @Test
+    void printCitiesTestContainsNull()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities.add(null);
+        app.printCities(cities);
+    }
+
+    @Test
+    void printCities()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City cit = new City();
+        cit.name = "Place";
+        cit.country_name = "BiggerPlace";
+        cit.district = "SlightlyBiggerPlace";
+        cit.population = 30000;
+        cities.add(cit);
+        app.printCities(cities);
     }
 }
