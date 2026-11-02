@@ -529,6 +529,11 @@ public class App
      * @return cities
      */
     public ArrayList<City> getCitiesByContinent(String continent) {
+        if(continent == null)
+        {
+            System.out.println("Continent is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -563,6 +568,11 @@ public class App
      * @return cities
      */
     public ArrayList<City> getCitiesByRegion(String region) {
+        if(region == null)
+        {
+            System.out.println("Region is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -597,6 +607,11 @@ public class App
      * @return cities
      */
     public ArrayList<City> getCitiesByCountry(String country) {
+        if(country == null)
+        {
+            System.out.println("Country is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -631,6 +646,11 @@ public class App
      * @return cities
      */
     public ArrayList<City> getCitiesByDistrict(String district) {
+        if(district == null)
+        {
+            System.out.println("District is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -661,10 +681,15 @@ public class App
 
     /**
      * Retrieves details for the top cities in the world and stores them in an ArrayList.
-     * @param limit - The number to get
+     * @param n - The number to get
      * @return cities
      */
-    public ArrayList<City> getTopCities(int limit) {
+    public ArrayList<City> getTopCities(Integer n) {
+        if(n == null)
+        {
+            System.out.println("Given number is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -672,7 +697,7 @@ public class App
                     "FROM city " +
                     "JOIN country ON city.CountryCode = country.code " +
                     "ORDER BY city.Population DESC " +
-                    "LIMIT " + limit + ";";
+                    "LIMIT " + n + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -695,11 +720,21 @@ public class App
 
     /**
      * Retrieves details for the top cities in a continent and stores them in an ArrayList.
-     * @param limit - The number to display
+     * @param n - The number to display
      * @param continent - the continent to filter by
      * @return cities
      */
-    public ArrayList<City> getTopCitiesByContinent(String continent, int limit) {
+    public ArrayList<City> getTopCitiesByContinent(String continent, Integer n) {
+        if(continent == null)
+        {
+            System.out.println("Continent is null");
+            return null;
+        }
+        if(n == null)
+        {
+            System.out.println("Given number is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -708,7 +743,7 @@ public class App
                     "JOIN country ON city.CountryCode = country.code " +
                     "WHERE country.Continent = '" + continent + "' " +
                     "ORDER BY city.Population DESC " +
-                    "LIMIT " + limit + ";";
+                    "LIMIT " + n + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -731,11 +766,21 @@ public class App
 
     /**
      * Retrieves details for all cities in a region and stores them in an ArrayList.
-     * @param limit - the number to display
+     * @param n - the number to display
      * @param region - the continent to filter by
      * @return cities
      */
-    public ArrayList<City> getTopCitiesByRegion(String region, int limit) {
+    public ArrayList<City> getTopCitiesByRegion(String region, Integer n) {
+        if(region == null)
+        {
+            System.out.println("Region is null");
+            return null;
+        }
+        if(n == null)
+        {
+            System.out.println("Given number is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -744,7 +789,7 @@ public class App
                     "JOIN country ON city.CountryCode = country.code " +
                     "WHERE country.Region = '" + region + "' " +
                     "ORDER BY city.Population DESC " +
-                    "LIMIT " + limit + ";";
+                    "LIMIT " + n + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -767,11 +812,21 @@ public class App
 
     /**
      * Retrieves details for the top cities in a country and stores them in an ArrayList.
-     * @param limit - the number to display
+     * @param n - the number to display
      * @param country - the continent to filter by
      * @return cities
      */
-    public ArrayList<City> getTopCitiesByCountry(String country, int limit) {
+    public ArrayList<City> getTopCitiesByCountry(String country, Integer n) {
+        if(country == null)
+        {
+            System.out.println("Country is null");
+            return null;
+        }
+        if(n == null)
+        {
+            System.out.println("Given number is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -780,7 +835,7 @@ public class App
                     "JOIN country ON city.CountryCode = country.code " +
                     "WHERE country.Name = '" + country + "' " +
                     "ORDER BY city.Population DESC " +
-                    "LIMIT " + limit + ";";
+                    "LIMIT " + n + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -803,11 +858,21 @@ public class App
 
     /**
      * Retrieves details for the top cities in a district and stores them in an ArrayList.
-     * @param limit - the number to display
+     * @param n - the number to display
      * @param district - the continent to filter by
      * @return cities
      */
-    public ArrayList<City> getTopCitiesByDistrict(String district, int limit) {
+    public ArrayList<City> getTopCitiesByDistrict(String district, Integer n) {
+        if(district == null)
+        {
+            System.out.println("District is null");
+            return null;
+        }
+        if(n == null)
+        {
+            System.out.println("Given number is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -816,7 +881,7 @@ public class App
                     "JOIN country ON city.CountryCode = country.code " +
                     "WHERE city.District = '" + district + "' " +
                     "ORDER BY city.Population DESC " +
-                    "LIMIT " + limit + ";";
+                    "LIMIT " + n + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -904,6 +969,11 @@ public class App
      * @return cities
      */
     public ArrayList<City> getCapCitiesByContinent(String continent) {
+        if(continent == null)
+        {
+            System.out.println("Continent is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -937,6 +1007,11 @@ public class App
      * @return cities
      */
     public ArrayList<City> getCapCitiesByRegion(String region) {
+        if(region == null)
+        {
+            System.out.println("Region is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -966,10 +1041,15 @@ public class App
 
     /**
      * Retrieves details for the top capital cities in the world and stores them in an ArrayList.
-     * @param limit - The number to get
+     * @param n - The number to get
      * @return cities
      */
-    public ArrayList<City> getTopCapCities(int limit) {
+    public ArrayList<City> getTopCapCities(Integer n) {
+        if(n == null)
+        {
+            System.out.println("Given number is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -977,7 +1057,7 @@ public class App
                     "FROM city " +
                     "JOIN country ON city.CountryCode = country.code " +
                     "ORDER BY city.Population DESC " +
-                    "LIMIT " + limit + ";";
+                    "LIMIT " + n + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -999,11 +1079,21 @@ public class App
 
     /**
      * Retrieves details for the top capital cities in a continent and stores them in an ArrayList.
-     * @param limit - The number to display
+     * @param n - The number to display
      * @param continent - the continent to filter by
      * @return cities
      */
-    public ArrayList<City> getTopCapCitiesByContinent(String continent, int limit) {
+    public ArrayList<City> getTopCapCitiesByContinent(String continent, Integer n) {
+        if(continent == null)
+        {
+            System.out.println("District is null");
+            return null;
+        }
+        if(n == null)
+        {
+            System.out.println("Given number is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -1012,7 +1102,7 @@ public class App
                     "JOIN country ON city.ID = country.Capital " +
                     "WHERE country.Continent = '" + continent + "' " +
                     "ORDER BY city.Population DESC " +
-                    "LIMIT " + limit + ";";
+                    "LIMIT " + n + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -1034,11 +1124,21 @@ public class App
 
     /**
      * Retrieves details for all cities in a region and stores them in an ArrayList.
-     * @param limit - the number to display
+     * @param n - the number to display
      * @param region - the continent to filter by
      * @return cities
      */
-    public ArrayList<City> getTopCapCitiesByRegion(String region, int limit) {
+    public ArrayList<City> getTopCapCitiesByRegion(String region, Integer n) {
+        if(region == null)
+        {
+            System.out.println("Region is null");
+            return null;
+        }
+        if(n == null)
+        {
+            System.out.println("Given number is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -1047,7 +1147,7 @@ public class App
                     "JOIN country ON city.ID = country.Capital " +
                     "WHERE country.Region = '" + region + "' " +
                     "ORDER BY city.Population DESC " +
-                    "LIMIT " + limit + ";";
+                    "LIMIT " + n + ";";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 

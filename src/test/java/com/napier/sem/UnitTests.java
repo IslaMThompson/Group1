@@ -151,4 +151,54 @@ public class UnitTests
         app.getTopCountriesByContinent("Africa", null);
         app.getTopCountriesByRegion("Caribbean", null);
     }
+
+    /**
+     * Testing get Cities reports
+     */
+    @Test
+    void getCitiesByAreaTestNull()
+    {
+        app.getAllCities();
+        app.getCitiesByContinent(null);
+        app.getCitiesByRegion(null);
+        app.getCitiesByCountry(null);
+        app.getCitiesByDistrict(null);
+    }
+
+    @Test
+    void getNCitiesByAreaTestNull()
+    {
+        app.getTopCities(null);
+        app.getTopCitiesByContinent(null, null);
+        app.getTopCitiesByRegion(null, null);
+        app.getTopCitiesByCountry(null, null);
+        app.getTopCitiesByDistrict(null, null);
+        // To force it to check null numbers
+        app.getTopCitiesByContinent("Africa", null);
+        app.getTopCitiesByRegion("Caribbean", null);
+        app.getTopCitiesByCountry("Afghanistan", null);
+        app.getTopCitiesByDistrict("California", null);
+    }
+
+    /**
+     * Testing get Capital Cities reports
+     */
+    @Test
+    void getCapCitiesByAreaTestNull()
+    {
+        app.getAllCapitalCities();
+        app.getCapCitiesByContinent(null);
+        app.getCapCitiesByRegion(null);
+    }
+
+    @Test
+    void getNCapCitiesByAreaTestNull()
+    {
+        app.getTopCities(null);
+        app.getTopCitiesByContinent(null, null);
+        app.getTopCitiesByRegion(null, null);
+        // To force it to check null numbers
+        app.getTopCitiesByContinent("Africa", null);
+        app.getTopCitiesByRegion("Caribbean", null);
+    }
 }
