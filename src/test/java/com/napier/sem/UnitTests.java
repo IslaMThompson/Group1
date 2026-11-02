@@ -93,4 +93,40 @@ public class UnitTests
         cities.add(cit);
         app.printCities(cities);
     }
+
+    /**
+     * Testing printCapCities
+     */
+    @Test
+    void printCapCitiesTestNull()
+    {
+        app.printCapCities(null);
+    }
+
+    @Test
+    void printCapCitiesTestEmpty()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        app.printCapCities(cities);
+    }
+
+    @Test
+    void printCapCitiesTestContainsNull()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        cities.add(null);
+        app.printCapCities(cities);
+    }
+
+    @Test
+    void printCapCities()
+    {
+        ArrayList<City> cities = new ArrayList<City>();
+        City cit = new City();
+        cit.name = "Place";
+        cit.country_name = "BiggerPlace";
+        cit.population = 62000;
+        cities.add(cit);
+        app.printCapCities(cities);
+    }
 }
