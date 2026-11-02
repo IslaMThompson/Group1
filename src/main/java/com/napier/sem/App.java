@@ -326,7 +326,12 @@ public class App
      * @param n the number of countries to print
      * @return countries
      */
-    public ArrayList<Country> getTopCountries(int n) {
+    public ArrayList<Country> getTopCountries(Integer n) {
+        if(n == null)
+        {
+            System.out.println("Given number is null");
+            return null;
+        }
         try {
             Statement stmt = con.createStatement();
 
@@ -363,10 +368,16 @@ public class App
      * @param continent - String for continent to filter by
      * @return countries
      */
-    public ArrayList<Country> getTopCountriesByContinent(String continent, int n) {
+    public ArrayList<Country> getTopCountriesByContinent(String continent, Integer n) {
         if(continent == null)
         {
             System.out.println("Continent is null");
+            return null;
+        }
+
+        if(n == null)
+        {
+            System.out.println("Given number is null");
             return null;
         }
 
@@ -407,10 +418,15 @@ public class App
      * @param region - String for region to filter by
      * @return countries
      */
-    public ArrayList<Country> getTopCountriesByRegion(String region, int n) {
+    public ArrayList<Country> getTopCountriesByRegion(String region, Integer n) {
         if(region == null)
         {
             System.out.println("Region is null");
+            return null;
+        }
+        if(n == null)
+        {
+            System.out.println("Given number is null");
             return null;
         }
 

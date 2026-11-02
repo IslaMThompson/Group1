@@ -129,4 +129,26 @@ public class UnitTests
         cities.add(cit);
         app.printCapCities(cities);
     }
+
+    /**
+     * Testing get Countries reports
+     */
+    @Test
+    void getCountriesByAreaTestNull()
+    {
+        app.getAllCountries();
+        app.getCountriesByContinent(null);
+        app.getCountriesByRegion(null);
+    }
+
+    @Test
+    void getNCountriesByAreaTestNull()
+    {
+        app.getTopCountries(null);
+        app.getTopCountriesByContinent(null, null);
+        app.getTopCountriesByRegion(null, null);
+        // To force it to check null numbers
+        app.getTopCountriesByContinent("Africa", null);
+        app.getTopCountriesByRegion("Caribbean", null);
+    }
 }
