@@ -15,7 +15,16 @@ public class App
     public static void main(String[] args)
     {
         App a = new App();
-        a.connect();
+
+        //no arguments = run locally (db on 33060), otherwise use the arg
+        if (args.length < 1)
+        {
+            a.connect("localhost:33060", 30000);
+        }
+        else
+        {
+            a.connect(args[0], Integer.parseInt(args[1]));
+        }
 
         // Gets and prints all countries in the world
         ArrayList<Country> allCountries = a.getAllCountries();
@@ -143,11 +152,11 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
+    public void connect(String location, int delay)
     {
         try
         {
-            // Load Database driver
+            //Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
@@ -157,20 +166,17 @@ public class App
         }
 
         // Connection to the database
-        int retries = 100;
+        int retries = 10;
         for (int i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(1000);
+                Thread.sleep(delay);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
                 System.out.println("Successfully connected");
-                // Wait a bit
-                Thread.sleep(1000);
-                // Exit for loop
                 break;
             }
             catch (SQLException sqle)
