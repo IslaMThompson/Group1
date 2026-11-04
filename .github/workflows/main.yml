@@ -17,6 +17,13 @@ jobs:
           distribution: 'temurin'
       - name: Unit Tests
         run: mvn -Dtest=com.napier.sem.UnitTests test
+      - name: CodeCov
+        uses: codecov/codecov-action@v7
+        with:
+          directory: ./target/site/jacoco
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   IntegrationTests:
     name: Integration Tests
     runs-on: ubuntu-22.04
