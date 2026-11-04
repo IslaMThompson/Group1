@@ -43,6 +43,8 @@ jobs:
         with:
           files: ./target/site/jacoco/jacoco.xml
           verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
   build:
     name: Build and Start Using docker-compose
     runs-on: ubuntu-22.04
