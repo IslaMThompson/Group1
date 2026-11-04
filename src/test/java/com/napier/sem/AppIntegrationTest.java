@@ -358,5 +358,15 @@ public class AppIntegrationTest
         assertNull(bad.getAllCountries());
     }
 
+    //--main method test--
+
+    @Test
+    void testMain()
+    {
+        //tests to  see if main method runs, this is mostly done for the sake of coverage %
+        String[] args = {"localhost:33060", "0"};
+        App.main(args);
+    }
+
 
 }
