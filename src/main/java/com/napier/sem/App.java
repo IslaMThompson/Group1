@@ -57,89 +57,89 @@ public class App
         ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
         a.printCountries(regionNCountries);
 
-        // Gets and prints all cities
-        ArrayList<City> allCities = a.getAllCities();
-        a.printCities(allCities);
-
-        // Gets and prints all cities in a continent
-        String uCContinent = "Africa";
-        ArrayList<City> continentCities = a.getCitiesByContinent(uCContinent);
-        a.printCities(continentCities);
-
-        // Gets and prints all cities in a region
-        String uCRegion = "Middle East";
-        ArrayList<City> regionCities = a.getCitiesByRegion(uCRegion);
-        a.printCities(regionCities);
-
-        // Gets and prints all cities in a country
-        String uCCountry = "Belarus";
-        ArrayList<City> countryCities = a.getCitiesByCountry(uCCountry);
-        a.printCities(countryCities);
-
-        // Gets and prints all cities in a district
-        String uCDistrict = "Zuid-Holland";
-        ArrayList<City> districtCities = a.getCitiesByDistrict(uCDistrict);
-        a.printCities(districtCities);
-
-        // Gets and prints top cities in the world
-        int n4 = 5;
-        ArrayList<City> topCities = a.getTopCities(n4);
-        a.printCities(topCities);
-
-        // Gets and prints the top cities in a continent
-        int n5 = 4;
-        String uCityContinent = "South America";
-        ArrayList<City> topContinentCities = a.getTopCitiesByContinent(uCityContinent, n5);
-        a.printCities(topContinentCities);
-
-        // Gets and prints the top cities in a region
-        int n6 = 6;
-        String uCityRegion = "Southern and Central Asia";
-        ArrayList<City> topRegionCities = a.getTopCitiesByRegion(uCityRegion, n6);
-        a.printCities(topRegionCities);
-
-        // Gets and prints the top cities in a country
-        int n7 = 20;
-        String uCityCountry = "United Kingdom";
-        ArrayList<City> topCountryCities = a.getTopCitiesByCountry(uCityCountry, n7);
-        a.printCities(topCountryCities);
-
-        // Gets and prints tha top cities in a district
-        int n8 = 6;
-        String uCityDistrict = "Buenos Aires";
-        ArrayList<City> topDistrictCities = a.getTopCitiesByDistrict(uCityDistrict, n8);
-        a.printCities(topDistrictCities);
-
-        // Get all capital cities in the world
-        ArrayList<City> allCapitalCities = a.getAllCapitalCities();
-        a.printCapCities(allCapitalCities);
-
-        // Get all capital cities in a continent
-        String uCapContinent = "Africa";
-        ArrayList<City> allContinentCapitalCities = a.getCapCitiesByContinent(uCapContinent);
-        a.printCapCities(allContinentCapitalCities);
-
-        // Get all capital cities in a region
-        String uCapRegion = "British Islands";
-        ArrayList<City> allRegionCapitalCities = a.getCapCitiesByRegion(uCapRegion);
-        a.printCapCities(allRegionCapitalCities);
-
-        // Get the top n capital cities in the world
-        int n9 = 10;
-        ArrayList<City> topCapitalCities = a.getTopCapCities(n9);
-        a.printCapCities(topCapitalCities);
-
-        // Get the top n capital cities in a continent
-        int n10 = 7;
-        String uNCapContinent = "Europe";
-        ArrayList<City> topCapContinentCities = a.getTopCapCitiesByContinent(uNCapContinent, n10);
-        a.printCapCities(topCapContinentCities);
-
-        // Get the top n capital cities in a region
-        int n11 = 8;
-        String uNCapCityRegion = "Western Europe";
-        ArrayList<City> topCapRegionCities = a.getTopCapCitiesByRegion(uNCapCityRegion, n11);
-        a.printCapCities(topCapRegionCities);
+//        // Gets and prints all cities
+//        ArrayList<City> allCities = a.getAllCities();
+//        a.printCities(allCities);
+//
+//        // Gets and prints all cities in a continent
+//        String uCContinent = "Africa";
+//        ArrayList<City> continentCities = a.getCitiesByContinent(uCContinent);
+//        a.printCities(continentCities);
+//
+//        // Gets and prints all cities in a region
+//        String uCRegion = "Middle East";
+//        ArrayList<City> regionCities = a.getCitiesByRegion(uCRegion);
+//        a.printCities(regionCities);
+//
+//        // Gets and prints all cities in a country
+//        String uCCountry = "Belarus";
+//        ArrayList<City> countryCities = a.getCitiesByCountry(uCCountry);
+//        a.printCities(countryCities);
+//
+//        // Gets and prints all cities in a district
+//        String uCDistrict = "Zuid-Holland";
+//        ArrayList<City> districtCities = a.getCitiesByDistrict(uCDistrict);
+//        a.printCities(districtCities);
+//
+//        // Gets and prints top cities in the world
+//        int n4 = 5;
+//        ArrayList<City> topCities = a.getTopCities(n4);
+//        a.printCities(topCities);
+//
+//        // Gets and prints the top cities in a continent
+//        int n5 = 4;
+//        String uCityContinent = "South America";
+//        ArrayList<City> topContinentCities = a.getTopCitiesByContinent(uCityContinent, n5);
+//        a.printCities(topContinentCities);
+//
+//        // Gets and prints the top cities in a region
+//        int n6 = 6;
+//        String uCityRegion = "Southern and Central Asia";
+//        ArrayList<City> topRegionCities = a.getTopCitiesByRegion(uCityRegion, n6);
+//        a.printCities(topRegionCities);
+//
+//        // Gets and prints the top cities in a country
+//        int n7 = 20;
+//        String uCityCountry = "United Kingdom";
+//        ArrayList<City> topCountryCities = a.getTopCitiesByCountry(uCityCountry, n7);
+//        a.printCities(topCountryCities);
+//
+//        // Gets and prints tha top cities in a district
+//        int n8 = 6;
+//        String uCityDistrict = "Buenos Aires";
+//        ArrayList<City> topDistrictCities = a.getTopCitiesByDistrict(uCityDistrict, n8);
+//        a.printCities(topDistrictCities);
+//
+//        // Get all capital cities in the world
+//        ArrayList<City> allCapitalCities = a.getAllCapitalCities();
+//        a.printCapCities(allCapitalCities);
+//
+//        // Get all capital cities in a continent
+//        String uCapContinent = "Africa";
+//        ArrayList<City> allContinentCapitalCities = a.getCapCitiesByContinent(uCapContinent);
+//        a.printCapCities(allContinentCapitalCities);
+//
+//        // Get all capital cities in a region
+//        String uCapRegion = "British Islands";
+//        ArrayList<City> allRegionCapitalCities = a.getCapCitiesByRegion(uCapRegion);
+//        a.printCapCities(allRegionCapitalCities);
+//
+//        // Get the top n capital cities in the world
+//        int n9 = 10;
+//        ArrayList<City> topCapitalCities = a.getTopCapCities(n9);
+//        a.printCapCities(topCapitalCities);
+//
+//        // Get the top n capital cities in a continent
+//        int n10 = 7;
+//        String uNCapContinent = "Europe";
+//        ArrayList<City> topCapContinentCities = a.getTopCapCitiesByContinent(uNCapContinent, n10);
+//        a.printCapCities(topCapContinentCities);
+//
+//        // Get the top n capital cities in a region
+//        int n11 = 8;
+//        String uNCapCityRegion = "Western Europe";
+//        ArrayList<City> topCapRegionCities = a.getTopCapCitiesByRegion(uNCapCityRegion, n11);
+//        a.printCapCities(topCapRegionCities);
 
         a.disconnect();
     }
@@ -220,7 +220,7 @@ public class App
 
             String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "JOIN city ON city.ID = country.Capital " +
+                    "LEFT JOIN city ON city.ID = country.Capital " +
                     "ORDER BY country.Population DESC;";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -261,7 +261,7 @@ public class App
 
             String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "JOIN city ON city.ID = country.Capital " +
+                    "LEFT JOIN city ON city.ID = country.Capital " +
                     "WHERE country.Continent = '" + continent + "' " +
                     "ORDER BY country.Population DESC;";
 
@@ -302,7 +302,7 @@ public class App
 
             String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "JOIN city ON city.ID = country.Capital " +
+                    "LEFT JOIN city ON city.ID = country.Capital " +
                     "WHERE country.Region = '" + region + "' " +
                     "ORDER BY country.Population DESC;";
 
@@ -343,7 +343,7 @@ public class App
 
             String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "JOIN city ON city.ID = country.Capital " +
+                    "LEFT JOIN city ON city.ID = country.Capital " +
                     "ORDER BY country.Population DESC " +
                     "LIMIT " + n;
 
@@ -392,7 +392,7 @@ public class App
 
             String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "JOIN city ON city.ID = country.Capital " +
+                    "LEFT JOIN city ON city.ID = country.Capital " +
                     "WHERE country.Continent = '" + continent + "' " +
                     "ORDER BY country.Population DESC " +
                     "LIMIT " + n;
@@ -441,7 +441,7 @@ public class App
 
             String strSelect = "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name AS Capital " +
                     "FROM country " +
-                    "JOIN city ON city.ID = country.Capital " +
+                    "LEFT JOIN city ON city.ID = country.Capital " +
                     "WHERE country.Region = '" + region + "' " +
                     "ORDER BY country.Population DESC " +
                     "LIMIT " + n;
@@ -1061,7 +1061,7 @@ public class App
 
             String strSelect = "SELECT city.Name, country.Name AS Country_name, city.Population " +
                     "FROM city " +
-                    "JOIN country ON city.CountryCode = country.code " +
+                    "JOIN country ON city.ID = country.capital " +
                     "ORDER BY city.Population DESC " +
                     "LIMIT " + n + ";";
 
