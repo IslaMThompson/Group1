@@ -26,9 +26,9 @@ public class AppIntegrationTest
         ArrayList<Country> countries = app.getTopCountries(3);
         assertNotNull(countries);
         assertEquals(countries.size(), 3);
-        assertEquals(countries.get(0).name, "China");
-        assertEquals(countries.get(1).name, "India");
-        assertEquals(countries.get(2).name, "United States");
+        assertEquals(countries.get(0).getName(), "China");
+        assertEquals(countries.get(1).getName(), "India");
+        assertEquals(countries.get(2).getName(), "United States");
     }
 
     @Test
@@ -39,11 +39,11 @@ public class AppIntegrationTest
         //All 239 countries, including the 7 that have no capital (changed from 232 that missed the ones that didnt have capitals due to the wrong join)
         assertEquals(countries.size(), 239);
         //sorted from largest to smallest, some countries have a population of 0 so they will be tied there at the end
-        assertEquals(countries.get(0).name, "China");
-        assertEquals(countries.get(0).capital, "Peking");
+        assertEquals(countries.get(0).getName(), "China");
+        assertEquals(countries.get(0).getCapital(), "Peking");
         Country last = countries.get(countries.size() - 1);
-        assertEquals(last.population, 0);
-        assertNull(last.capital);
+        assertEquals(last.getPopulation(), 0);
+        assertNull(last.getCapital());
     }
 
     //added to further test countries with no capital
@@ -53,7 +53,7 @@ public class AppIntegrationTest
         ArrayList<Country> countries = app.getCountriesByContinent("Antarctica");
         assertNotNull(countries);
         assertEquals(countries.size(), 5);
-        assertNull(countries.get(0).capital);
+        assertNull(countries.get(0).getCapital());
     }
 
     @Test
@@ -62,11 +62,11 @@ public class AppIntegrationTest
         ArrayList<Country> countries = app.getCountriesByContinent("Europe");
         assertNotNull(countries);
         assertEquals(countries.size(), 46);
-        assertEquals(countries.get(0).name, "Russian Federation");
-        assertEquals(countries.get(0).capital, "Moscow");
+        assertEquals(countries.get(0).getName(), "Russian Federation");
+        assertEquals(countries.get(0).getCapital(), "Moscow");
         Country last = countries.get(countries.size() - 1);
-        assertEquals(last.name, "Holy See (Vatican City State)");
-        assertEquals(last.population, 1000);
+        assertEquals(last.getName(), "Holy See (Vatican City State)");
+        assertEquals(last.getPopulation(), 1000);
     }
 
     @Test
@@ -83,8 +83,8 @@ public class AppIntegrationTest
         ArrayList<Country> countries = app.getCountriesByRegion("Caribbean");
         assertNotNull(countries);
         assertEquals(countries.size(), 24);
-        assertEquals(countries.get(0).name, "Cuba");
-        assertEquals(countries.get(0).capital, "La Habana");
+        assertEquals(countries.get(0).getName(), "Cuba");
+        assertEquals(countries.get(0).getCapital(), "La Habana");
     }
 
     @Test
@@ -93,10 +93,10 @@ public class AppIntegrationTest
         ArrayList<Country> countries = app.getTopCountriesByContinent("Asia", 4);
         assertNotNull(countries);
         assertEquals(countries.size(), 4);
-        assertEquals(countries.get(0).name, "China");
-        assertEquals(countries.get(1).name, "India");
-        assertEquals(countries.get(2).name, "Indonesia");
-        assertEquals(countries.get(3).name, "Pakistan");
+        assertEquals(countries.get(0).getName(), "China");
+        assertEquals(countries.get(1).getName(), "India");
+        assertEquals(countries.get(2).getName(), "Indonesia");
+        assertEquals(countries.get(3).getName(), "Pakistan");
     }
 
     @Test
@@ -105,8 +105,8 @@ public class AppIntegrationTest
         ArrayList<Country> countries = app.getTopCountriesByRegion("Polynesia", 4);
         assertNotNull(countries);
         assertEquals(countries.size(), 4);
-        assertEquals(countries.get(0).name, "French Polynesia");
-        assertEquals(countries.get(3).name, "American Samoa");
+        assertEquals(countries.get(0).getName(), "French Polynesia");
+        assertEquals(countries.get(3).getName(), "American Samoa");
     }
 
     @Test
