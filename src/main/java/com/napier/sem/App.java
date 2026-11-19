@@ -30,10 +30,12 @@ public class App
         ArrayList<Country> allCountries = a.getAllCountries();
         a.printCountries(allCountries);
 
+
         // Gets and prints all countries in a continent
         String uContinent = "Europe";
         ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
         a.printCountries(continentCountries);
+
 
         // Gets and prints all countries in a region
         String uRegion = "Caribbean";
@@ -57,6 +59,7 @@ public class App
         ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
         a.printCountries(regionNCountries);
 
+        /*
         // Gets and prints all cities
         ArrayList<City> allCities = a.getAllCities();
         a.printCities(allCities);
@@ -141,6 +144,8 @@ public class App
         ArrayList<City> topCapRegionCities = a.getTopCapCitiesByRegion(uNCapCityRegion, n11);
         a.printCapCities(topCapRegionCities);
 
+
+         */
         a.disconnect();
     }
 
@@ -227,13 +232,7 @@ public class App
 
             ArrayList<Country> countries = new ArrayList<>();
             while (rset.next()) {
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getString("Capital");
+                Country country = new Country(rset.getString("Code"), rset.getString("Name"), rset.getString("Continent"), rset.getString("Region"), rset.getInt("Population"), rset.getString("Capital"));
                 countries.add(country);
             }
             return countries;
@@ -243,6 +242,7 @@ public class App
             return null;
         }
     }
+
 
     /**
      * Retrieves details for all countries in specified continent and stores them in an ArrayList.
@@ -269,13 +269,7 @@ public class App
 
             ArrayList<Country> countries = new ArrayList<>();
             while (rset.next()) {
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getString("Capital");
+                Country country = new Country(rset.getString("Code"), rset.getString("Name"), rset.getString("Continent"), rset.getString("Region"), rset.getInt("Population"), rset.getString("Capital"));
                 countries.add(country);
             }
             return countries;
@@ -310,13 +304,7 @@ public class App
 
             ArrayList<Country> countries = new ArrayList<>();
             while (rset.next()) {
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getString("Capital");
+                Country country = new Country(rset.getString("Code"), rset.getString("Name"), rset.getString("Continent"), rset.getString("Region"), rset.getInt("Population"), rset.getString("Capital"));
                 countries.add(country);
             }
             return countries;
@@ -351,13 +339,7 @@ public class App
 
             ArrayList<Country> countries = new ArrayList<>();
             while (rset.next()) {
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getString("Capital");
+                Country country = new Country(rset.getString("Code"), rset.getString("Name"), rset.getString("Continent"), rset.getString("Region"), rset.getInt("Population"), rset.getString("Capital"));
                 countries.add(country);
             }
             return countries;
@@ -401,13 +383,7 @@ public class App
 
             ArrayList<Country> countries = new ArrayList<>();
             while (rset.next()) {
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getString("Capital");
+                Country country = new Country(rset.getString("Code"), rset.getString("Name"), rset.getString("Continent"), rset.getString("Region"), rset.getInt("Population"), rset.getString("Capital"));
                 countries.add(country);
             }
             return countries;
@@ -450,13 +426,7 @@ public class App
 
             ArrayList<Country> countries = new ArrayList<>();
             while (rset.next()) {
-                Country country = new Country();
-                country.code = rset.getString("Code");
-                country.name = rset.getString("Name");
-                country.continent = rset.getString("Continent");
-                country.region = rset.getString("Region");
-                country.population = rset.getInt("Population");
-                country.capital = rset.getString("Capital");
+                Country country = new Country(rset.getString("Code"), rset.getString("Name"), rset.getString("Continent"), rset.getString("Region"), rset.getInt("Population"), rset.getString("Capital"));
                 countries.add(country);
             }
             return countries;
@@ -492,7 +462,7 @@ public class App
                 continue;
 
             String country_string = String.format("%-8s %-40s %-15s %-30s %-15s %-10s",
-                    country.code, country.name, country.continent, country.region, country.population, country.capital);
+                    country.getCode(), country.getName(), country.getContinent(), country.getRegion(), country.getPopulation(), country.getCapital());
             System.out.println(country_string);
         }
     }
