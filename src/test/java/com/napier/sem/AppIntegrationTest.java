@@ -123,13 +123,13 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getAllCities();
         assertNotNull(cities);
         assertEquals(cities.size(), 4079);
-        assertEquals(cities.get(0).name, "Mumbai (Bombay)");
-        assertEquals(cities.get(0).country_name, "India");
-        assertEquals(cities.get(0).district, "Maharashtra");
-        assertEquals(cities.get(0).population, 10500000);
+        assertEquals(cities.get(0).getName(), "Mumbai (Bombay)");
+        assertEquals(cities.get(0).getCountry_name(), "India");
+        assertEquals(cities.get(0).getDistrict(), "Maharashtra");
+        assertEquals(cities.get(0).getPopulation(), 10500000);
         City last = cities.get(cities.size() - 1);
-        assertEquals(last.name, "Adamstown");
-        assertEquals(last.population, 42);
+        assertEquals(last.getName(), "Adamstown");
+        assertEquals(last.getPopulation(), 42);
     }
 
     @Test
@@ -138,8 +138,8 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getCitiesByContinent("Africa");
         assertNotNull(cities);
         assertEquals(cities.size(), 366);
-        assertEquals(cities.get(0).name, "Cairo");
-        assertEquals(cities.get(0).country_name, "Egypt");
+        assertEquals(cities.get(0).getName(), "Cairo");
+        assertEquals(cities.get(0).getCountry_name(), "Egypt");
     }
 
     @Test
@@ -148,8 +148,8 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getCitiesByRegion("Middle East");
         assertNotNull(cities);
         assertEquals(cities.size(), 174);
-        assertEquals(cities.get(0).name, "Istanbul");
-        assertEquals(cities.get(0).country_name, "Turkey");
+        assertEquals(cities.get(0).getName(), "Istanbul");
+        assertEquals(cities.get(0).getCountry_name(), "Turkey");
     }
 
     @Test
@@ -158,8 +158,8 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getCitiesByCountry("Belarus");
         assertNotNull(cities);
         assertEquals(cities.size(), 16);
-        assertEquals(cities.get(0).name, "Minsk");
-        assertEquals(cities.get(0).district, "Horad Minsk");
+        assertEquals(cities.get(0).getName(), "Minsk");
+        assertEquals(cities.get(0).getDistrict(), "Horad Minsk");
     }
 
     @Test
@@ -168,9 +168,9 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getCitiesByDistrict("Zuid-Holland");
         assertNotNull(cities);
         assertEquals(cities.size(), 6);
-        assertEquals(cities.get(0).name, "Rotterdam");
-        assertEquals(cities.get(0).population, 593321);
-        assertEquals(cities.get(5).name, "Delft");
+        assertEquals(cities.get(0).getName(), "Rotterdam");
+        assertEquals(cities.get(0).getPopulation(), 593321);
+        assertEquals(cities.get(5).getName(), "Delft");
     }
 
     @Test
@@ -187,9 +187,9 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getTopCities(5);
         assertNotNull(cities);
         assertEquals(cities.size(), 5);
-        assertEquals(cities.get(0).name, "Mumbai (Bombay)");
-        assertEquals(cities.get(1).name, "Seoul");
-        assertEquals(cities.get(4).name, "Jakarta");
+        assertEquals(cities.get(0).getName(), "Mumbai (Bombay)");
+        assertEquals(cities.get(1).getName(), "Seoul");
+        assertEquals(cities.get(4).getName(), "Jakarta");
     }
 
     @Test
@@ -198,9 +198,9 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getTopCitiesByContinent("South America", 4);
         assertNotNull(cities);
         assertEquals(cities.size(), 4);
-        assertEquals(cities.get(0).country_name, "Brazil");
-        assertEquals(cities.get(1).name, "Lima");
-        assertEquals(cities.get(3).name, "Rio de Janeiro");
+        assertEquals(cities.get(0).getCountry_name(), "Brazil");
+        assertEquals(cities.get(1).getName(), "Lima");
+        assertEquals(cities.get(3).getName(), "Rio de Janeiro");
     }
 
     @Test
@@ -209,9 +209,9 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getTopCitiesByRegion("Southern and Central Asia", 6);
         assertNotNull(cities);
         assertEquals(cities.size(), 6);
-        assertEquals(cities.get(0).name, "Mumbai (Bombay)");
-        assertEquals(cities.get(1).name, "Karachi");
-        assertEquals(cities.get(2).name, "Delhi");
+        assertEquals(cities.get(0).getName(), "Mumbai (Bombay)");
+        assertEquals(cities.get(1).getName(), "Karachi");
+        assertEquals(cities.get(2).getName(), "Delhi");
     }
 
     @Test
@@ -220,9 +220,9 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getTopCitiesByCountry("United Kingdom", 20);
         assertNotNull(cities);
         assertEquals(cities.size(), 20);
-        assertEquals(cities.get(0).name, "London");
-        assertEquals(cities.get(0).population, 7285000);
-        assertEquals(cities.get(1).name, "Birmingham");
+        assertEquals(cities.get(0).getName(), "London");
+        assertEquals(cities.get(0).getPopulation(), 7285000);
+        assertEquals(cities.get(1).getName(), "Birmingham");
     }
 
     @Test
@@ -231,8 +231,8 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getTopCitiesByDistrict("Buenos Aires", 6);
         assertNotNull(cities);
         assertEquals(cities.size(), 6);
-        assertEquals(cities.get(0).name, "La Matanza");
-        assertEquals(cities.get(5).name, "Mar del Plata");
+        assertEquals(cities.get(0).getName(), "La Matanza");
+        assertEquals(cities.get(5).getName(), "Mar del Plata");
     }
 
     //capital cities
@@ -243,12 +243,12 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getAllCapitalCities();
         assertNotNull(cities);
         assertEquals(cities.size(), 232);
-        assertEquals(cities.get(0).name, "Seoul");
-        assertEquals(cities.get(0).country_name, "South Korea");
-        assertEquals(cities.get(0).population, 9981619);
+        assertEquals(cities.get(0).getName(), "Seoul");
+        assertEquals(cities.get(0).getCountry_name(), "South Korea");
+        assertEquals(cities.get(0).getPopulation(), 9981619);
         City last = cities.get(cities.size() - 1);
-        assertEquals(last.name, "Adamstown");
-        assertEquals(last.country_name, "Pitcairn");
+        assertEquals(last.getName(), "Adamstown");
+        assertEquals(last.getCountry_name(), "Pitcairn");
     }
 
     @Test
@@ -257,8 +257,8 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getCapCitiesByContinent("Africa");
         assertNotNull(cities);
         assertEquals(cities.size(), 57);
-        assertEquals(cities.get(0).name, "Cairo");
-        assertEquals(cities.get(0).country_name, "Egypt");
+        assertEquals(cities.get(0).getName(), "Cairo");
+        assertEquals(cities.get(0).getCountry_name(), "Egypt");
     }
 
     @Test
@@ -267,8 +267,8 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getCapCitiesByRegion("British Islands");
         assertNotNull(cities);
         assertEquals(cities.size(), 2);
-        assertEquals(cities.get(0).name, "London");
-        assertEquals(cities.get(1).name, "Dublin");
+        assertEquals(cities.get(0).getName(), "London");
+        assertEquals(cities.get(1).getName(), "Dublin");
     }
 
     @Test
@@ -277,9 +277,9 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getTopCapCities(3);
         assertNotNull(cities);
         assertEquals(cities.size(), 3);
-        assertEquals(cities.get(0).name, "Seoul");
-        assertEquals(cities.get(1).name, "Jakarta");
-        assertEquals(cities.get(2).country_name, "Mexico");
+        assertEquals(cities.get(0).getName(), "Seoul");
+        assertEquals(cities.get(1).getName(), "Jakarta");
+        assertEquals(cities.get(2).getCountry_name(), "Mexico");
     }
 
     @Test
@@ -288,9 +288,9 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getTopCapCitiesByContinent("Europe", 7);
         assertNotNull(cities);
         assertEquals(cities.size(), 7);
-        assertEquals(cities.get(0).name, "Moscow");
-        assertEquals(cities.get(1).name, "London");
-        assertEquals(cities.get(6).name, "Paris");
+        assertEquals(cities.get(0).getName(), "Moscow");
+        assertEquals(cities.get(1).getName(), "London");
+        assertEquals(cities.get(6).getName(), "Paris");
     }
 
     @Test
@@ -299,8 +299,8 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getTopCapCitiesByRegion("Western Europe", 8);
         assertNotNull(cities);
         assertEquals(cities.size(), 8);
-        assertEquals(cities.get(0).name, "Berlin");
-        assertEquals(cities.get(7).name, "Vaduz");
+        assertEquals(cities.get(0).getName(), "Berlin");
+        assertEquals(cities.get(7).getName(), "Vaduz");
     }
 
 

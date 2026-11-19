@@ -59,7 +59,7 @@ public class App
         ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
         a.printCountries(regionNCountries);
 
-        /*
+
         // Gets and prints all cities
         ArrayList<City> allCities = a.getAllCities();
         a.printCities(allCities);
@@ -144,8 +144,6 @@ public class App
         ArrayList<City> topCapRegionCities = a.getTopCapCitiesByRegion(uNCapCityRegion, n11);
         a.printCapCities(topCapRegionCities);
 
-
-         */
         a.disconnect();
     }
 
@@ -484,11 +482,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getString("District"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -523,11 +517,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getString("District"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -562,11 +552,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getString("District"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -601,11 +587,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getString("District"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -640,11 +622,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getString("District"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -679,11 +657,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getString("District"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -725,11 +699,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getString("District"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -771,11 +741,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getString("District"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -817,11 +783,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getString("District"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -863,11 +825,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.district = rset.getString("District");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getString("District"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -903,7 +861,7 @@ public class App
                 continue;
 
             String country_string = String.format("%-40s %-40s %-20s %-20s",
-                    city.name, city.country_name, city.district, city.population);
+                    city.getName(), city.getCountry_name(), city.getDistrict(), city.getPopulation());
             System.out.println(country_string);
         }
     }
@@ -925,10 +883,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -963,10 +918,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -1001,10 +953,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -1039,10 +988,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -1084,10 +1030,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -1098,12 +1041,15 @@ public class App
         }
     }
 
+
+
     /**
      * Retrieves details for all cities in a region and stores them in an ArrayList.
      * @param n - the number to display
      * @param region - the continent to filter by
      * @return cities
      */
+
     public ArrayList<City> getTopCapCitiesByRegion(String region, Integer n) {
         if(region == null)
         {
@@ -1129,10 +1075,7 @@ public class App
 
             ArrayList<City> cities = new ArrayList<>();
             while (rset.next()) {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.country_name = rset.getString("Country_Name");
-                city.population = rset.getInt("Population");
+                City city = new City(rset.getString("Name"), rset.getString("Country_Name"), rset.getInt("Population"));
                 cities.add(city);
             }
             return cities;
@@ -1142,6 +1085,8 @@ public class App
             return null;
         }
     }
+
+
 
     /**
      * Prints a list of capital cities.
@@ -1168,8 +1113,9 @@ public class App
                 continue;
 
             String country_string = String.format("%-40s %-40s %-20s",
-                    city.name, city.country_name, city.population);
+                    city.getName(), city.getCountry_name(), city.getPopulation());
             System.out.println(country_string);
         }
     }
+
 }

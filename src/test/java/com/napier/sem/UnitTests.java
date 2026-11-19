@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class UnitTests
 {
     static App app;
@@ -16,6 +18,95 @@ public class UnitTests
     static void init()
     {
         app = new App();
+    }
+
+
+    /**
+     * Testing Country class getters
+     */
+    @Test
+    void countriesClassGetters()
+    {
+        Country coun = new Country("ABW", "Place", "BiggerPlace", "BigBigPlace", 200000, "ABW");
+        assertEquals(coun.getCode(), "ABW");
+        assertEquals(coun.getName(), "Place");
+        assertEquals(coun.getContinent(), "BiggerPlace");
+        assertEquals(coun.getRegion(), "BigBigPlace");
+        assertEquals(coun.getPopulation(), 200000);
+        assertEquals(coun.getCapital(), "ABW");
+    }
+    /**
+     * Testing Country class getters
+     */
+    @Test
+    void countriesClassSetters()
+    {
+        Country coun = new Country("ABW", "Place", "BiggerPlace", "BigBigPlace", 200000, "ABW");
+
+        coun.setCode("ERT");
+        coun.setName("aaaa");
+        coun.setContinent("cccc");
+        coun.setRegion("rrrr");
+        coun.setPopulation(10);
+        coun.setCapital("WWW");
+
+        assertEquals(coun.getCode(), "ERT");
+        assertEquals(coun.getName(), "aaaa");
+        assertEquals(coun.getContinent(), "cccc");
+        assertEquals(coun.getRegion(), "rrrr");
+        assertEquals(coun.getPopulation(), 10);
+        assertEquals(coun.getCapital(), "WWW");
+    }
+    /**
+     * Testing Country class toString
+     */
+    @Test
+    void countriesClassToString()
+    {
+        Country coun = new Country("ABW", "Place", "BiggerPlace", "BigBigPlace", 200000, "ABW");
+        String country = coun.toString();
+        System.out.println(country);
+    }
+
+    /**
+     * Testing City class getters
+     */
+    @Test
+    void citiesClassGetters()
+    {
+        City cit = new City("Place", "BiggerPlace", "SlightlyBiggerPlace", 30000);
+        assertEquals(cit.getName(), "Place");
+        assertEquals(cit.getCountry_name(), "BiggerPlace");
+        assertEquals(cit.getDistrict(), "SlightlyBiggerPlace");
+        assertEquals(cit.getPopulation(), 30000);
+    }
+    /**
+     * Testing City class getters
+     */
+    @Test
+    void citiesClassSetters()
+    {
+        City cit = new City("Place", "BiggerPlace", "SlightlyBiggerPlace", 30000);
+
+        cit.setName("tttt");
+        cit.setCountry_name("qqqq");
+        cit.setDistrict("oooo");
+        cit.setPopulation(9000);
+
+        assertEquals(cit.getName(), "tttt");
+        assertEquals(cit.getCountry_name(), "qqqq");
+        assertEquals(cit.getDistrict(), "oooo");
+        assertEquals(cit.getPopulation(), 9000);
+    }
+    /**
+     * Testing City class getters
+     */
+    @Test
+    void citiesClassToString()
+    {
+        City cit = new City("Place", "BiggerPlace", "SlightlyBiggerPlace", 30000);
+        String city = cit.toString();
+        System.out.println(city);
     }
 
     /**
@@ -97,11 +188,7 @@ public class UnitTests
     void printCities()
     {
         ArrayList<City> cities = new ArrayList<City>();
-        City cit = new City();
-        cit.name = "Place";
-        cit.country_name = "BiggerPlace";
-        cit.district = "SlightlyBiggerPlace";
-        cit.population = 30000;
+        City cit = new City("Place", "BiggerPlace", "SlightlyBiggerPlace", 30000);
         cities.add(cit);
         app.printCities(cities);
     }
@@ -143,10 +230,7 @@ public class UnitTests
     void printCapCities()
     {
         ArrayList<City> cities = new ArrayList<City>();
-        City cit = new City();
-        cit.name = "Place";
-        cit.country_name = "BiggerPlace";
-        cit.population = 62000;
+        City cit = new City("Place", "BiggerPlace", 62000);
         cities.add(cit);
         app.printCapCities(cities);
     }
