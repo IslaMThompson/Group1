@@ -303,6 +303,16 @@ public class AppIntegrationTest
         assertEquals(cities.get(7).getName(), "Vaduz");
     }
 
+    @Test
+    void testGetWorldPopulation()
+    {
+        Population populations = app.getWorldPopulation();
+        assertNotNull(populations);
+        //Checking the right number is outputted
+        assertEquals(populations.getArea_name(), "World");
+        assertEquals(populations.getPopulation(), 6078749450L);
+    }
+
 
     //connection tests
 

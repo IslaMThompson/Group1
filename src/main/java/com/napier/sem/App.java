@@ -26,6 +26,7 @@ public class App
             a.connect(args[0], Integer.parseInt(args[1]));
         }
 
+
         // Gets and prints all countries in the world
         ArrayList<Country> allCountries = a.getAllCountries();
         a.printCountries(allCountries);
@@ -144,6 +145,45 @@ public class App
         ArrayList<City> topCapRegionCities = a.getTopCapCitiesByRegion(uNCapCityRegion, n11);
         a.printCapCities(topCapRegionCities);
 
+        // Gets the total population of the World
+        Population worldPopulation = a.getWorldPopulation();
+        a.printPopulationReport(worldPopulation);
+
+        // Gets the total population of a continent
+        Population continentPopulation = a.getContinentPopulation("Europe");
+        a.printPopulationReport(continentPopulation);
+
+        // Gets the total population of a region
+        Population regionPopulation = a.getRegionPopulation("Central Africa");
+        a.printPopulationReport(regionPopulation);
+
+        // Gets the total population of a country
+        Population countryPopulation = a.getCountryPopulation("Faroe Islands");
+        a.printPopulationReport(countryPopulation);
+
+        // Gets the total population of a district
+        Population districtPopulation = a.getDistrictPopulation("Fukushima");
+        a.printPopulationReport(districtPopulation);
+
+        // Gets the total population of a city
+        Population cityPopulation = a.getCityPopulation("Zaanstad");
+        a.printPopulationReport(cityPopulation);
+
+        // Gets the total population of speakers of certain languages
+        ArrayList<Population> languages = a.getLanguagePopulation();
+        a.printLanguagePopulations(languages);
+
+        // Gets the total population of people living in cities and outside cities in each continent
+        ArrayList<Population> pContinents = a.getContinentCitiesPopulation();
+        a.printCitiesPopulations(pContinents);
+
+        // Gets the total population of people living in cities and outside cities in each region
+        ArrayList<Population> pRegions = a.getRegionCitiesPopulation();
+        a.printCitiesPopulations(pRegions);
+
+        // Gets the total population of people living in cities and outside cities in each population
+        ArrayList<Population> pCountries = a.getCountryCitiesPopulation();
+        a.printCitiesPopulations(pCountries);
         a.disconnect();
     }
 
@@ -1049,7 +1089,6 @@ public class App
      * @param region - the continent to filter by
      * @return cities
      */
-
     public ArrayList<City> getTopCapCitiesByRegion(String region, Integer n) {
         if(region == null)
         {
@@ -1086,8 +1125,6 @@ public class App
         }
     }
 
-
-
     /**
      * Prints a list of capital cities.
      * @param cCities The list of capital cities to print.
@@ -1115,6 +1152,423 @@ public class App
             String country_string = String.format("%-40s %-40s %-20s",
                     city.getName(), city.getCountry_name(), city.getPopulation());
             System.out.println(country_string);
+        }
+    }
+
+    /**
+     * Retrieves Population of the entire world.
+     * @return population
+     */
+    public Population getWorldPopulation() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT SUM(Population) AS TotalPop FROM country;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset.next()) {
+                Population population = new Population("World", rset.getLong("TotalPop"));
+                return population;
+            }
+            return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves Population of a continent.
+     * @return population
+     */
+    public Population getContinentPopulation(String continent) {
+        if(continent == null)
+        {
+            System.out.println("Continent is null");
+            return null;
+        }
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT Continent AS Area, SUM(Population) AS TotalPop FROM country " +
+                    "WHERE Continent = '" + continent + "' ;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset.next()) {
+                Population population = new Population(rset.getString("Area"), rset.getLong("TotalPop"));
+                return population;
+            }
+            return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves Population of a region.
+     * @return population
+     */
+    public Population getRegionPopulation(String region) {
+        if(region == null)
+        {
+            System.out.println("region is null");
+            return null;
+        }
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT Region AS Area, SUM(Population) AS TotalPop FROM country " +
+                    "WHERE Region = '" + region + "' ;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset.next()) {
+                Population population = new Population(rset.getString("Area"), rset.getLong("TotalPop"));
+                return population;
+            }
+            return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves Population of a country.
+     * @return population
+     */
+    public Population getCountryPopulation(String country) {
+        if(country == null)
+        {
+            System.out.println("country is null");
+            return null;
+        }
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT Name AS Area, Population FROM country " +
+                    "WHERE Name = '" + country + "' ;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset.next()) {
+                Population population = new Population(rset.getString("Area"), rset.getLong("Population"));
+                return population;
+            }
+            return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves Population of a district.
+     * @return population
+     */
+    public Population getDistrictPopulation(String district) {
+        if(district == null)
+        {
+            System.out.println("district is null");
+            return null;
+        }
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT District AS Area, SUM(Population) AS TotalPop FROM city " +
+                    "WHERE District = '" + district + "' ;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset.next()) {
+                Population population = new Population(rset.getString("Area"), rset.getLong("TotalPop"));
+                return population;
+            }
+            return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves Population of a city.
+     * @return population
+     */
+    public Population getCityPopulation(String city) {
+        if(city == null)
+        {
+            System.out.println("city is null");
+            return null;
+        }
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect = "SELECT Name, Population FROM city " +
+                    "WHERE Name = '" + city + "' ;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset.next()) {
+                Population population = new Population(rset.getString("Name"), rset.getLong("Population"));
+                return population;
+            }
+            return null;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details.");
+            return null;
+        }
+    }
+
+    /**
+     * Prints an area and it's population.
+     * @param population -
+     */
+    public void printPopulationReport(Population population) {
+        // Check population is not null.
+        if (population == null) {
+            System.out.println("No areas in list");
+            return;
+        }
+
+        // Print header.
+        System.out.println(String.format("%-40s %-40s", "Area", "Population"));
+
+            String population_string = String.format("%-40s %-40s",
+                    population.getArea_name(), population.getPopulation());
+            System.out.println(population_string);
+    }
+
+    /**
+     * Retrieves details for languages and the number of speakers and stores them in an arraylist.
+     * @return populations
+     */
+    public ArrayList<Population> getLanguagePopulation() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT cl.Language, " +
+                            "SUM((c.Population * cl.Percentage) / 100) AS TotalSpeakers, " +
+                            "(SUM((c.Population * cl.Percentage) / 100) / " +
+                            "(SELECT SUM(Population) FROM country)) * 100 AS WorldPercentage " +
+                            "FROM countrylanguage cl " +
+                            "JOIN country c ON c.Code = cl.CountryCode " +
+                            "WHERE cl.Language IN ('Chinese', 'English', 'Hindi', 'Spanish', 'Arabic') " +
+                            "GROUP BY cl.Language " +
+                            "ORDER BY TotalSpeakers DESC;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Population> populations = new ArrayList<>();
+            while (rset.next()) {
+                Population population = new Population(rset.getString("Language"), rset.getLong("TotalSpeakers"), rset.getFloat("WorldPercentage"));
+                populations.add(population);
+            }
+            return populations;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get language details.");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of language populations.
+     * @param populations The list languages to print.
+     */
+    public void printLanguagePopulations(ArrayList<Population> populations) {
+        // Check populations is not null.
+        if (populations == null) {
+            System.out.println("No cities in list.");
+            return;
+        }
+        else if(populations.isEmpty())
+        {
+            System.out.println("No cities in list.");
+            return;
+        }
+
+        // Print header.
+        System.out.println(String.format("%-40s %-40s %-20s", "Language", "Population", "Percent of World"));
+
+        // Loop over all countries in the list.
+        for (Population population : populations) {
+            if (population == null)
+                continue;
+
+            String population_string = String.format("%-40s %-40s %-20s",
+                    population.getLanguage(), population.getPopulation(), population.getLanguage_per());
+            System.out.println(population_string);
+        }
+    }
+
+    /**
+     * Retrieves details for the population of people in cities and outside cities in each continent.
+     * @return populations
+     */
+    public ArrayList<Population> getContinentCitiesPopulation() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT c.Continent, " +
+                            "SUM(c.Population) AS TotalPop, " +
+                            "(SELECT SUM(ci.Population) " +
+                            "FROM city ci " +
+                            "JOIN country c2 ON ci.CountryCode = c2.Code " +
+                            "WHERE c2.Continent = c.Continent) AS CityPop " +
+                            "FROM country c " +
+                            "GROUP BY c.Continent " +
+                            "ORDER BY TotalPop DESC;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Population> populations = new ArrayList<>();
+            while (rset.next()) {
+                String cont = rset.getString("Continent");
+                long total = rset.getLong("TotalPop");
+                long city = rset.getLong("CityPop");
+                long nonCity = total - city;
+                float city_per = 0;
+                float nonCity_per = 0;
+                if (total>0) {
+                    float city1 = city;
+                    float nonCity1 = nonCity;
+                    city_per = (city1 / total) * 100;
+                    nonCity_per = (nonCity1 / total) * 100;
+                }
+                Population population = new Population(cont, total, city, city_per, nonCity, nonCity_per);
+                populations.add(population);
+            }
+            return populations;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves details for the population of people in cities and outside cities in each region.
+     * @return populations
+     */
+    public ArrayList<Population> getRegionCitiesPopulation() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT c.Region, " +
+                            "SUM(c.Population) AS TotalPop, " +
+                            "(SELECT SUM(ci.Population) " +
+                            "FROM city ci " +
+                            "JOIN country c2 ON ci.CountryCode = c2.Code " +
+                            "WHERE c2.Region = c.Region) AS CityPop " +
+                            "FROM country c " +
+                            "GROUP BY c.Region " +
+                            "ORDER BY TotalPop DESC;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Population> populations = new ArrayList<>();
+            while (rset.next()) {
+                String reg = rset.getString("Region");
+                long total = rset.getLong("TotalPop");
+                long city = rset.getLong("CityPop");
+                long nonCity = total - city;
+                float city_per = 0;
+                float nonCity_per = 0;
+                if (total>0) {
+                    float city1 = city;
+                    float nonCity1 = nonCity;
+                    city_per = (city1 / total) * 100;
+                    nonCity_per = (nonCity1 / total) * 100;
+                }
+                Population population = new Population(reg, total, city, city_per, nonCity, nonCity_per);
+                populations.add(population);
+            }
+            return populations;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details.");
+            return null;
+        }
+    }
+
+    /**
+     * Retrieves details for the population of people in cities and outside cities in each country.
+     * @return populations
+     */
+    public ArrayList<Population> getCountryCitiesPopulation() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT c.Name AS Country, " +
+                            "c.Population AS TotalPop, " +
+                            "(SELECT SUM(ci.Population) " +
+                            "FROM city ci " +
+                            "WHERE ci.CountryCode = c.Code) AS CityPop " +
+                            "FROM country c " +
+                            "ORDER BY c.Population DESC";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Population> populations = new ArrayList<>();
+            while (rset.next()) {
+                String coun = rset.getString("Country");
+                long total = rset.getLong("TotalPop");
+                long city = rset.getLong("CityPop");
+                long nonCity = total - city;
+                float city_per = 0;
+                float nonCity_per = 0;
+                if (total>0) {
+                    float city1 = city;
+                    float nonCity1 = nonCity;
+                    city_per = (city1 / total) * 100;
+                    nonCity_per = (nonCity1 / total) * 100;
+                }
+                Population population = new Population(coun, total, city, city_per, nonCity, nonCity_per);
+                populations.add(population);
+            }
+            return populations;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details.");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of Populations of people in cities and not in cities in areas.
+     * @param populations The list of populations to print.
+     */
+    public void printCitiesPopulations(ArrayList<Population> populations) {
+        // Check populations is not null.
+        if (populations == null) {
+            System.out.println("No populations in list.");
+            return;
+        }
+        else if(populations.isEmpty())
+        {
+            System.out.println("No populations in list.");
+            return;
+        }
+
+        // Print header.
+        System.out.println(String.format("%-40s %-20s %-20s %-20s %-20s %-20s", "Area", "Population", "In Cities", "% In Cities", "Not In Cities", "% Not In Cities"));
+
+        // Loop over all populations in the list.
+        for (Population population : populations) {
+            if (population == null)
+                continue;
+
+            String population_string = String.format("%-40s %-20s %-20s %-20s %-20s %-20s",
+                    population.getArea_name(), population.getPopulation(), population.getPop_In_Cities(), population.getPop_In_Cities_Per(), population.getPop_Outside_Cities(), population.getPop_Outside_Cities_Per());
+            System.out.println(population_string);
         }
     }
 

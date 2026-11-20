@@ -110,6 +110,52 @@ public class UnitTests
     }
 
     /**
+     * Testing Population class getters
+     */
+    @Test
+    void populationClassGetters()
+    {
+        Population pop = new Population("World", 1234, 34, 34.5F, 1200, 12.6F);
+        assertEquals(pop.getArea_name(), "World");
+        assertEquals(pop.getPopulation(), 1234);
+        assertEquals(pop.getPop_In_Cities(), 34);
+        assertEquals(pop.getPop_In_Cities_Per(), 34.5);
+        assertEquals(pop.getPop_Outside_Cities(), 1200);
+        assertEquals(pop.getPop_Outside_Cities_Per(), 12.6);
+    }
+    /**
+     * Testing Population class getters
+     */
+    @Test
+    void populationClassSetters()
+    {
+        Population pop = new Population("World", 1234, 34, 34.5F, 1200, 12.6F);
+
+        pop.setArea_name("newName");
+        pop.setPopulation(4567);
+        pop.setPop_In_Cities(567);
+        pop.setPop_In_Cities_Per(9.5F);
+        pop.setPop_Outside_Cities(4000);
+        pop.setPop_Outside_Cities_Per(90.5F);
+
+        assertEquals(pop.getArea_name(), "newName");
+        assertEquals(pop.getPopulation(), 4567);
+        assertEquals(pop.getPop_In_Cities(), 567);
+        assertEquals(pop.getPop_In_Cities_Per(), 9.5F);
+        assertEquals(pop.getPop_Outside_Cities(), 4000);
+        assertEquals(pop.getPop_Outside_Cities_Per(), 90.5F);
+    }
+    /**
+     * Testing Population class toString
+     */
+    @Test
+    void populationClassToString()
+    {
+        Population pop = new Population("World", 1234, 34, 34.5F, 1200, 12.6F);
+        String population = pop.toString();
+        System.out.println(population);
+    }
+    /**
      * Testing printCountries with no input
      */
     @Test
