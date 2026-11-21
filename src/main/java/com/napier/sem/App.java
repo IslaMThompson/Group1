@@ -1383,12 +1383,12 @@ public class App
     public void printLanguagePopulations(ArrayList<Population> populations) {
         // Check populations is not null.
         if (populations == null) {
-            System.out.println("No cities in list.");
+            System.out.println("No populations in list.");
             return;
         }
         else if(populations.isEmpty())
         {
-            System.out.println("No cities in list.");
+            System.out.println("No populations in list.");
             return;
         }
 

@@ -344,6 +344,16 @@ public class AppIntegrationTest
         assertNull(notConnected.getTopCapCities(3));
         assertNull(notConnected.getTopCapCitiesByContinent("Europe", 7));
         assertNull(notConnected.getTopCapCitiesByRegion("Western Europe", 8));
+        assertNull(notConnected.getWorldPopulation());
+        assertNull(notConnected.getContinentPopulation("Europe"));
+        assertNull(notConnected.getRegionPopulation("Western Europe"));
+        assertNull(notConnected.getCountryPopulation("Belarus"));
+        assertNull(notConnected.getDistrictPopulation("Buenos Aires"));
+        assertNull(notConnected.getCityPopulation("Kabul"));
+        assertNull(notConnected.getLanguagePopulation());
+        assertNull(notConnected.getContinentCitiesPopulation());
+        assertNull(notConnected.getRegionCitiesPopulation());
+        assertNull(notConnected.getCountryCitiesPopulation());
         notConnected.disconnect(); //nothing to close, since its never ran, but checking to see if anything explodes
     }
 

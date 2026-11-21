@@ -121,7 +121,7 @@ public class UnitTests
         assertEquals(pop.getPop_In_Cities(), 34);
         assertEquals(pop.getPop_In_Cities_Per(), 34.5);
         assertEquals(pop.getPop_Outside_Cities(), 1200);
-        assertEquals(pop.getPop_Outside_Cities_Per(), 12.6);
+        assertEquals(pop.getPop_Outside_Cities_Per(), 12.6F);
     }
     /**
      * Testing Population class getters
@@ -137,6 +137,8 @@ public class UnitTests
         pop.setPop_In_Cities_Per(9.5F);
         pop.setPop_Outside_Cities(4000);
         pop.setPop_Outside_Cities_Per(90.5F);
+        pop.setLanguage("English");
+        pop.setLanguage_per(34.5F);
 
         assertEquals(pop.getArea_name(), "newName");
         assertEquals(pop.getPopulation(), 4567);
@@ -144,6 +146,8 @@ public class UnitTests
         assertEquals(pop.getPop_In_Cities_Per(), 9.5F);
         assertEquals(pop.getPop_Outside_Cities(), 4000);
         assertEquals(pop.getPop_Outside_Cities_Per(), 90.5F);
+        assertEquals(pop.getLanguage(), "English");
+        assertEquals(pop.getLanguage_per(), 34.5F);
     }
     /**
      * Testing Population class toString
@@ -170,7 +174,7 @@ public class UnitTests
     @Test
     void printCountriesTestEmpty()
     {
-        ArrayList<Country> countries = new ArrayList<Country>();
+        ArrayList<Country> countries = new ArrayList<>();
         app.printCountries(countries);
     }
 
@@ -180,7 +184,7 @@ public class UnitTests
     @Test
     void printCountriesTestContainsNull()
     {
-        ArrayList<Country> countries = new ArrayList<Country>();
+        ArrayList<Country> countries = new ArrayList<>();
         countries.add(null);
         app.printCountries(countries);
     }
@@ -191,7 +195,7 @@ public class UnitTests
     @Test
     void printCountries()
     {
-        ArrayList<Country> countries = new ArrayList<Country>();
+        ArrayList<Country> countries = new ArrayList<>();
         Country coun = new Country("ABW", "Place", "BiggerPlace", "BigBigPlace", 200000, "ABW");
         countries.add(coun);
         app.printCountries(countries);
@@ -212,7 +216,7 @@ public class UnitTests
     @Test
     void printCitiesTestEmpty()
     {
-        ArrayList<City> cities = new ArrayList<City>();
+        ArrayList<City> cities = new ArrayList<>();
         app.printCities(cities);
     }
 
@@ -222,7 +226,7 @@ public class UnitTests
     @Test
     void printCitiesTestContainsNull()
     {
-        ArrayList<City> cities = new ArrayList<City>();
+        ArrayList<City> cities = new ArrayList<>();
         cities.add(null);
         app.printCities(cities);
     }
@@ -233,7 +237,7 @@ public class UnitTests
     @Test
     void printCities()
     {
-        ArrayList<City> cities = new ArrayList<City>();
+        ArrayList<City> cities = new ArrayList<>();
         City cit = new City("Place", "BiggerPlace", "SlightlyBiggerPlace", 30000);
         cities.add(cit);
         app.printCities(cities);
@@ -254,7 +258,7 @@ public class UnitTests
     @Test
     void printCapCitiesTestEmpty()
     {
-        ArrayList<City> cities = new ArrayList<City>();
+        ArrayList<City> cities = new ArrayList<>();
         app.printCapCities(cities);
     }
 
@@ -264,7 +268,7 @@ public class UnitTests
     @Test
     void printCapCitiesTestContainsNull()
     {
-        ArrayList<City> cities = new ArrayList<City>();
+        ArrayList<City> cities = new ArrayList<>();
         cities.add(null);
         app.printCapCities(cities);
     }
@@ -275,10 +279,127 @@ public class UnitTests
     @Test
     void printCapCities()
     {
-        ArrayList<City> cities = new ArrayList<City>();
+        ArrayList<City> cities = new ArrayList<>();
         City cit = new City("Place", "BiggerPlace", 62000);
         cities.add(cit);
         app.printCapCities(cities);
+    }
+
+    /**
+     * Testing printPopulationReport with normal data
+     */
+    @Test
+    void printPopulationReport()
+    {
+        Population population = new Population("APlace", 4600);
+        app.printPopulationReport(population);
+    }
+
+    /**
+     * Testing printPopulationReport with no input
+     */
+    @Test
+    void printPopulationReportTestNull()
+    {
+        app.printPopulationReport(null);
+    }
+
+    /**
+     * Testing printPopulationReport with empty input
+     */
+    @Test
+    void printPopulationReportTestEmpty()
+    {
+        Population population = new Population(null, 0);
+        app.printPopulationReport(population);
+    }
+
+    /**
+     * Testing printLanguagePopulation with no input
+     */
+    @Test
+    void printLanguagePopulationTestNull()
+    {
+        app.printLanguagePopulations(null);
+    }
+
+    /**
+     * Testing printLanguagePopulation with empty input
+     */
+    @Test
+    void printLanguagePopulationTestEmpty()
+    {
+        ArrayList<Population> populations = new ArrayList<>();
+        app.printLanguagePopulations(populations);
+    }
+
+    /**
+     * Testing printLanguagePopulation with input that is null
+     */
+    @Test
+    void printLanguagePopulationTestContainsNull()
+    {
+        ArrayList<Population> populations = new ArrayList<>();
+        populations.add(null);
+        app.printLanguagePopulations(populations);
+    }
+
+    /**
+     * Testing printLanguagePopulation with normal data
+     */
+    @Test
+    void printLanguagePopulation()
+    {
+        ArrayList<Population> populations = new ArrayList<>();
+        Population pop = new Population("English", 7000, 36.7F);
+        populations.add(pop);
+        app.printLanguagePopulations(populations);
+    }
+
+
+
+
+
+    /**
+     * Testing printCitiesPopulations with no input
+     */
+    @Test
+    void printCitiesPopulationsTestNull()
+    {
+        app.printCitiesPopulations(null);
+    }
+
+    /**
+     * Testing printCitiesPopulations with empty input
+     */
+    @Test
+    void printCitiesPopulationsTestEmpty()
+    {
+        ArrayList<Population> populations = new ArrayList<>();
+        app.printCitiesPopulations(populations);
+    }
+
+    /**
+     * Testing printCitiesPopulations with input that is null
+     */
+    @Test
+    void printCitiesPopulationsTestContainsNull()
+    {
+        ArrayList<Population> populations = new ArrayList<>();
+        populations.add(null);
+        app.printCitiesPopulations(populations);
+    }
+
+    /**
+     * Testing printCitiesPopulations with normal data
+     */
+    @Test
+    void printCitiesPopulations()
+    {
+        ArrayList<Population> populations = new ArrayList<>();
+        Population pop = new Population("ACity", 7000, 4000, 45.7F, 3000, 5.6F);
+        populations.add(pop);
+        app.printCitiesPopulations(populations);
     }
 
     /**
@@ -361,4 +482,18 @@ public class UnitTests
         app.getTopCapCitiesByContinent("Africa", null);
         app.getTopCapCitiesByRegion("Caribbean", null);
     }
+
+    /**
+     * Testing PlacePopulation reports with null inputs
+     */
+    @Test
+    void getPlacePopulationTestNull()
+    {
+        app.getContinentPopulation(null);
+        app.getRegionPopulation(null);
+        app.getCountryPopulation(null);
+        app.getDistrictPopulation(null);
+        app.getCityPopulation(null);
+    }
+
 }
