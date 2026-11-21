@@ -1,5 +1,8 @@
 package com.napier.sem;
 
+/**
+ * A class to hold the population information
+ */
 public class Population {
     private String area_name;
     private long population;
@@ -10,6 +13,15 @@ public class Population {
     private String language;
     private float language_per;
 
+    /**
+     * Constructor for the population inside and outside cities
+     * @param area_name -
+     * @param population -
+     * @param pop_In_Cities -
+     * @param pop_In_Cities_Per -
+     * @param pop_Outside_Cities -
+     * @param pop_Outside_Cities_Per -
+     */
     public Population(String area_name, long population, long pop_In_Cities, float pop_In_Cities_Per, long pop_Outside_Cities, float pop_Outside_Cities_Per) {
         this.area_name = area_name;
         this.population = population;
@@ -19,17 +31,31 @@ public class Population {
         this.pop_Outside_Cities_Per = pop_Outside_Cities_Per;
     }
 
+    /**
+     * Constructor for and areas population
+     * @param area_name -
+     * @param population -
+     */
     public Population(String area_name, long population) {
         this.area_name = area_name;
         this.population = population;
     }
 
+    /**
+     * Constructor for language populations
+     * @param language -
+     * @param population -
+     * @param language_per -
+     */
     public Population(String language, long population, float language_per) {
         this.language = language;
         this.population = population;
         this.language_per = language_per;
     }
 
+    /**
+     * Getters and setters
+     */
     public String getArea_name() {
         return area_name;
     }
@@ -86,6 +112,10 @@ public class Population {
         this.language_per = language_per;
     }
 
+    /**
+     * To string method
+     * @return A string
+     */
     @Override
     public String toString() {
         return super.toString();

@@ -1,7 +1,9 @@
 package com.napier.sem;
 
+/**
+ * A class to hold the country information
+ */
 public class Country {
-
     private String code;
     private String name;
     private String continent;
@@ -9,6 +11,15 @@ public class Country {
     private int population;
     private String capital;
 
+    /**
+     * A constructor for all the country information
+     * @param code -
+     * @param name -
+     * @param continent -
+     * @param region -
+     * @param population -
+     * @param capital -
+     */
     public Country(String code, String name, String continent, String region, int population, String capital) {
         this.code = code;
         this.name = name;
@@ -18,6 +29,9 @@ public class Country {
         this.capital = capital;
     }
 
+    /**
+     * Getters and setters
+     */
     public String getCode() {
         return code;
     }
@@ -62,6 +76,10 @@ public class Country {
         this.capital = capital;
     }
 
+    /**
+     * To string method
+     * @return A string
+     */
     @Override
     public String toString() {
         return super.toString();

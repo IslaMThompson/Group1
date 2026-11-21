@@ -24,7 +24,6 @@ jobs:
           verbose: true
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
   IntegrationTests:
     name: Integration Tests
     runs-on: ubuntu-22.04
