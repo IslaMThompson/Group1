@@ -1,0 +1,57 @@
+name: Bug Report
+description: Report a problem with one of the population reports or the build.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please fill in as much detail as you can.
+  - type: dropdown
+    id: report
+    attributes:
+      label: Which part of the project is affected?
+      options:
+        - Country reports
+        - City reports
+        - Capital city reports
+        - Population reports
+        - Language report
+        - Population in and out of cities reports
+        - Build, Docker or GitHub Actions
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the problem, and what you expected to happen instead.
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we see the problem for ourselves?
+      placeholder: |
+        1. Run the application
+        2. Open the report
+        3. Look at the output
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Which release or branch were you using?
+      placeholder: e.g. v0.1-alpha-4 or develop
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output
+      description: Paste any relevant console output or error messages. This is formatted as code automatically, so no backticks are needed.
+      render: shell
