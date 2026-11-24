@@ -2,6 +2,10 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Application to generate various reports from the world database
@@ -30,160 +34,194 @@ public class App
         // Gets and prints all countries in the world
         ArrayList<Country> allCountries = a.getAllCountries();
         a.printCountries(allCountries);
+        a.outputCountries(allCountries, "AllCountries.md");
 
 
         // Gets and prints all countries in a continent
         String uContinent = "Europe";
         ArrayList<Country> continentCountries = a.getCountriesByContinent(uContinent);
         a.printCountries(continentCountries);
+        a.outputCountries(continentCountries, "CountriesInContinent.md");
 
 
         // Gets and prints all countries in a region
         String uRegion = "Caribbean";
         ArrayList<Country> regionCountries = a.getCountriesByRegion(uRegion);
         a.printCountries(regionCountries);
+        a.outputCountries(regionCountries, "CountriesInRegion.md");
 
         // Gets and prints the top n countries in the world
         int n1 = 3;
         ArrayList<Country> allNCountries = a.getTopCountries(n1);
         a.printCountries(allNCountries);
+        a.outputCountries(allNCountries, "TopCountries.md");
 
         // Gets and prints the top n countries in a continent
         String uNContinent = "Asia";
         int n2 = 4;
         ArrayList<Country> continentNCountries = a.getTopCountriesByContinent(uNContinent, n2);
         a.printCountries(continentNCountries);
+        a.outputCountries(continentNCountries, "TopCountriesInContinent.md");
 
         // Gets and prints the top n countries in a region
         String uNRegion = "Polynesia";
         int n3 = 4;
         ArrayList<Country> regionNCountries = a.getTopCountriesByRegion(uNRegion, n3);
         a.printCountries(regionNCountries);
+        a.outputCountries(regionNCountries, "TopCountriesInRegion.md");
 
 
         // Gets and prints all cities
         ArrayList<City> allCities = a.getAllCities();
         a.printCities(allCities);
+        a.outputCities(allCities, "AllCities.md");
 
         // Gets and prints all cities in a continent
         String uCContinent = "Africa";
         ArrayList<City> continentCities = a.getCitiesByContinent(uCContinent);
         a.printCities(continentCities);
+        a.outputCities(continentCities, "CitiesInContinent.md");
 
         // Gets and prints all cities in a region
         String uCRegion = "Middle East";
         ArrayList<City> regionCities = a.getCitiesByRegion(uCRegion);
         a.printCities(regionCities);
+        a.outputCities(regionCities, "CitiesInRegion.md");
 
         // Gets and prints all cities in a country
         String uCCountry = "Belarus";
         ArrayList<City> countryCities = a.getCitiesByCountry(uCCountry);
         a.printCities(countryCities);
+        a.outputCities(countryCities, "CitiesInCountry.md");
 
         // Gets and prints all cities in a district
         String uCDistrict = "Zuid-Holland";
         ArrayList<City> districtCities = a.getCitiesByDistrict(uCDistrict);
         a.printCities(districtCities);
+        a.outputCities(districtCities, "CitiesInDistrict.md");
 
         // Gets and prints top cities in the world
         int n4 = 5;
         ArrayList<City> topCities = a.getTopCities(n4);
         a.printCities(topCities);
+        a.outputCities(topCities, "TopCities.md");
 
         // Gets and prints the top cities in a continent
         int n5 = 4;
         String uCityContinent = "South America";
         ArrayList<City> topContinentCities = a.getTopCitiesByContinent(uCityContinent, n5);
         a.printCities(topContinentCities);
+        a.outputCities(topContinentCities, "TopCitiesInContinent.md");
 
         // Gets and prints the top cities in a region
         int n6 = 6;
         String uCityRegion = "Southern and Central Asia";
         ArrayList<City> topRegionCities = a.getTopCitiesByRegion(uCityRegion, n6);
         a.printCities(topRegionCities);
+        a.outputCities(topRegionCities, "TopCitiesInRegion.md");
 
         // Gets and prints the top cities in a country
         int n7 = 20;
         String uCityCountry = "United Kingdom";
         ArrayList<City> topCountryCities = a.getTopCitiesByCountry(uCityCountry, n7);
         a.printCities(topCountryCities);
+        a.outputCities(topCountryCities, "TopCitiesInCountry.md");
 
         // Gets and prints tha top cities in a district
         int n8 = 6;
         String uCityDistrict = "Buenos Aires";
         ArrayList<City> topDistrictCities = a.getTopCitiesByDistrict(uCityDistrict, n8);
         a.printCities(topDistrictCities);
+        a.outputCities(topDistrictCities, "TopCitiesInDistrict.md");
 
         // Get all capital cities in the world
         ArrayList<City> allCapitalCities = a.getAllCapitalCities();
         a.printCapCities(allCapitalCities);
+        a.outputCapCities(allCapitalCities, "AllCapitalCities.md");
 
         // Get all capital cities in a continent
         String uCapContinent = "Africa";
         ArrayList<City> allContinentCapitalCities = a.getCapCitiesByContinent(uCapContinent);
         a.printCapCities(allContinentCapitalCities);
+        a.outputCapCities(allContinentCapitalCities, "CapitalCitiesInContinent.md");
 
         // Get all capital cities in a region
         String uCapRegion = "British Islands";
         ArrayList<City> allRegionCapitalCities = a.getCapCitiesByRegion(uCapRegion);
         a.printCapCities(allRegionCapitalCities);
+        a.outputCapCities(allRegionCapitalCities, "CapitalCitiesInRegion.md");
 
         // Get the top n capital cities in the world
         int n9 = 10;
         ArrayList<City> topCapitalCities = a.getTopCapCities(n9);
         a.printCapCities(topCapitalCities);
+        a.outputCapCities(topCapitalCities, "TopCapitalCities.md");
 
         // Get the top n capital cities in a continent
         int n10 = 7;
         String uNCapContinent = "Europe";
         ArrayList<City> topCapContinentCities = a.getTopCapCitiesByContinent(uNCapContinent, n10);
         a.printCapCities(topCapContinentCities);
+        a.outputCapCities(topCapContinentCities, "TopCapitalCitiesInContinent.md");
 
         // Get the top n capital cities in a region
         int n11 = 8;
         String uNCapCityRegion = "Western Europe";
         ArrayList<City> topCapRegionCities = a.getTopCapCitiesByRegion(uNCapCityRegion, n11);
         a.printCapCities(topCapRegionCities);
+        a.outputCapCities(topCapRegionCities, "TopCapitalCitiesInRegion.md");
 
         // Gets the total population of the World
         Population worldPopulation = a.getWorldPopulation();
         a.printPopulationReport(worldPopulation);
+        a.outputPopulationReport(worldPopulation, "WorldPopulation.md");
 
         // Gets the total population of a continent
         Population continentPopulation = a.getContinentPopulation("Europe");
         a.printPopulationReport(continentPopulation);
+        a.outputPopulationReport(continentPopulation, "ContinentPopulation.md");
 
         // Gets the total population of a region
         Population regionPopulation = a.getRegionPopulation("Central Africa");
         a.printPopulationReport(regionPopulation);
+        a.outputPopulationReport(regionPopulation, "RegionPopulation.md");
 
         // Gets the total population of a country
         Population countryPopulation = a.getCountryPopulation("Faroe Islands");
         a.printPopulationReport(countryPopulation);
+        a.outputPopulationReport(countryPopulation, "CountryPopulation.md");
 
         // Gets the total population of a district
         Population districtPopulation = a.getDistrictPopulation("Fukushima");
         a.printPopulationReport(districtPopulation);
+        a.outputPopulationReport(districtPopulation, "DistrictPopulation.md");
 
         // Gets the total population of a city
         Population cityPopulation = a.getCityPopulation("Zaanstad");
         a.printPopulationReport(cityPopulation);
+        a.outputPopulationReport(cityPopulation, "CityPopulation.md");
 
         // Gets the total population of speakers of certain languages
         ArrayList<Population> languages = a.getLanguagePopulation();
         a.printLanguagePopulations(languages);
+        a.outputLanguagePopulations(languages, "LanguagePopulations.md");
 
         // Gets the total population of people living in cities and outside cities in each continent
         ArrayList<Population> pContinents = a.getContinentCitiesPopulation();
         a.printCitiesPopulations(pContinents);
 
+        a.outputCitiesPopulations(pContinents, "ContinentPopulationInCities.md");
+
         // Gets the total population of people living in cities and outside cities in each region
         ArrayList<Population> pRegions = a.getRegionCitiesPopulation();
         a.printCitiesPopulations(pRegions);
+        a.outputCitiesPopulations(pRegions, "RegionPopulationInCities.md");
 
         // Gets the total population of people living in cities and outside cities in each population
         ArrayList<Population> pCountries = a.getCountryCitiesPopulation();
         a.printCitiesPopulations(pCountries);
+        a.outputCitiesPopulations(pCountries, "CountryPopulationInCities.md");
+
         a.disconnect();
     }
 
@@ -504,6 +542,53 @@ public class App
             System.out.println(country_string);
         }
     }
+
+
+    /**
+     * writes mark down info to a file in the reports branch.
+     * @param filename the name of the file to create, for exmple "AllCountries.md".
+     * @param content the mark down content to write.
+     */
+    private void writeMarkdown(String filename, String content) {
+        try {
+            new File("./reports/").mkdir();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./reports/" + filename)));
+            writer.write(content);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * outputs a list of countries to a mark down file in the reports branch.
+     * @param countries the list of countries that will be  output
+     * @param filename the name of the file that will be created
+     */
+    public void outputCountries(ArrayList<Country> countries, String filename) {
+        //check countries is not null or empty
+        if (countries == null || countries.isEmpty()) {
+            System.out.println("No countries in list.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        //print header
+        sb.append("| Code | Name | Continent | Region | Population | Capital |\r\n");
+        sb.append("| --- | --- | --- | --- | --- | --- |\r\n");
+
+        //loop over all countries in the list
+        for (Country country : countries) {
+            if (country == null)
+                continue;
+            sb.append("| " + country.getCode() + " | " + country.getName() + " | " +
+                    country.getContinent() + " | " + country.getRegion() + " | " +
+                    country.getPopulation() + " | " + country.getCapital() + " |\r\n");
+        }
+        writeMarkdown(filename, sb.toString());
+    }
+
+
 
     /**
      * Retrieves details for all cities in the world and stores them in an ArrayList.
@@ -906,6 +991,34 @@ public class App
         }
     }
 
+
+    /**
+     * outputs a list of cities to a mark down file in the reports branch
+     * @param cities the list of cities to output
+     * @param filename the name of the file to create, e.g: "AllCities.md"
+     */
+    public void outputCities(ArrayList<City> cities, String filename) {
+        //check cities is not null or empty
+        if (cities == null || cities.isEmpty()) {
+            System.out.println("No cities in list.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        //print header
+        sb.append("| Name | Country | District | Population |\r\n");
+        sb.append("| --- | --- | --- | --- |\r\n");
+
+        //loop over all cities in the list
+        for (City city : cities) {
+            if (city == null)
+                continue;
+            sb.append("| " + city.getName() + " | " + city.getCountry_name() + " | " +
+                    city.getDistrict() + " | " + city.getPopulation() + " |\r\n");
+        }
+        writeMarkdown(filename, sb.toString());
+    }
+
     /**
      * Retrieves details for all capital cities in the world and stores them in an ArrayList.
      * @return cities
@@ -1155,6 +1268,35 @@ public class App
         }
     }
 
+
+
+    /**
+     * outputs a list of capital cities to a MARKk down files in the reports branch
+     * @param cCities The list of capital cities to output
+     * @param filename The name of the file to create, e.g: "AllCapitalCities.md"
+     */
+    public void outputCapCities(ArrayList<City> cCities, String filename) {
+        //check cCities is not null or empty
+        if (cCities == null || cCities.isEmpty()) {
+            System.out.println("No cities in list.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        //print the header
+        sb.append("| Name | Country | Population |\r\n");
+        sb.append("| --- | --- | --- |\r\n");
+
+        //loop over all capital cities in list
+        for (City city : cCities) {
+            if (city == null)
+                continue;
+            sb.append("| " + city.getName() + " | " + city.getCountry_name() + " | " +
+                    city.getPopulation() + " |\r\n");
+        }
+        writeMarkdown(filename, sb.toString());
+    }
+
     /**
      * Retrieves Population of the entire world.
      * @return population
@@ -1342,6 +1484,27 @@ public class App
             System.out.println(population_string);
     }
 
+
+    /**
+     * outputs an area and its population to a mark down file in the reports branch
+     * @param population the population to output
+     * @param filename the name of the file to create, e.g: "WorldPopulation.md"
+     */
+    public void outputPopulationReport(Population population, String filename) {
+        //check population is not null
+        if (population == null) {
+            System.out.println("No areas in list");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        //print header
+        sb.append("| Area | Population |\r\n");
+        sb.append("| --- | --- |\r\n");
+        sb.append("| " + population.getArea_name() + " | " + population.getPopulation() + " |\r\n");
+        writeMarkdown(filename, sb.toString());
+    }
+
     /**
      * Retrieves details for languages and the number of speakers and stores them in an arraylist.
      * @return populations
@@ -1404,6 +1567,34 @@ public class App
                     population.getLanguage(), population.getPopulation(), population.getLanguage_per());
             System.out.println(population_string);
         }
+    }
+
+
+    /**
+     * outputs a list of language populations to a Markdown file in the reports branch
+     * @param populations The list of languages to output
+     * @param filename The name of the file to create, e.g: "LanguagePopulations.md"
+     */
+    public void outputLanguagePopulations(ArrayList<Population> populations, String filename) {
+        //check populations is not null or empty
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No populations in list.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        //print header
+        sb.append("| Language | Population | Percent of World |\r\n");
+        sb.append("| --- | --- | --- |\r\n");
+
+        //loop over all languages in the list
+        for (Population population : populations) {
+            if (population == null)
+                continue;
+            sb.append("| " + population.getLanguage() + " | " + population.getPopulation() + " | " +
+                    population.getLanguage_per() + " |\r\n");
+        }
+        writeMarkdown(filename, sb.toString());
     }
 
     /**
@@ -1571,5 +1762,35 @@ public class App
             System.out.println(population_string);
         }
     }
+
+    /**
+     * outputs a list of populations in and out of cities to a Mark down file in the reports
+     * @param populations the list of populations to output
+     * @param filename the name of the file to create, e.g   "ContinentPopulationInCities.md"
+     */
+    public void outputCitiesPopulations(ArrayList<Population> populations, String filename) {
+        //check populations is not null or empty
+        if (populations == null || populations.isEmpty()) {
+            System.out.println("No populations in list.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        //print header
+        sb.append("| Area | Population | In Cities | % In Cities | Not In Cities | % Not In Cities |\r\n");
+        sb.append("| --- | --- | --- | --- | --- | --- |\r\n");
+
+        //loop over all populations in the list
+        for (Population population : populations) {
+            if (population == null)
+                continue;
+            sb.append("| " + population.getArea_name() + " | " + population.getPopulation() + " | " +
+                    population.getPop_In_Cities() + " | " + population.getPop_In_Cities_Per() + " | " +
+                    population.getPop_Outside_Cities() + " | " + population.getPop_Outside_Cities_Per() + " |\r\n");
+        }
+        writeMarkdown(filename, sb.toString());
+    }
+
+
 
 }

@@ -80,3 +80,11 @@ jobs:
           automatic_release_tag: "latest"
           files: |
             ./target/*.jar
+      - name: Copy Output
+        run: docker container cp group1-app-1:./tmp/reports ./
+      - name: Deploy
+        if: github.ref == 'refs/heads/release'
+        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        with:
+          branch: reports # The branch the action should deploy to.
+          folder: reports # The folder we are copying
