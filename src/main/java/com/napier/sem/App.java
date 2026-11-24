@@ -217,7 +217,7 @@ public class App
         a.printCitiesPopulations(pRegions);
         a.outputCitiesPopulations(pRegions, "RegionPopulationInCities.md");
 
-        // Gets the total population of people living in cities and outside cities in each population
+        // Gets the total population of people living in cities and outside cities in each country
         ArrayList<Population> pCountries = a.getCountryCitiesPopulation();
         a.printCitiesPopulations(pCountries);
         a.outputCitiesPopulations(pCountries, "CountryPopulationInCities.md");
